@@ -1,0 +1,122 @@
+@import '../../variables.scss';
+
+$card-hover-color: #ae00ffd6;
+$dark: grey;
+$light: #ffffff36;
+//$grad1: linear-gradient(to top, #84fab0 0%, #8fd3f4 80%, #0eaaf5 100%);
+$grad2: linear-gradient(60deg, #0eaaf5 20%, #057386 40%, #ad01ff 100%);
+
+
+.card {
+  position: relative;
+  display: flex;
+/*   width: calc(33% - 2.1rem);
+  min-width: 250px;
+  max-width: 300px; */
+  border: 1px solid $light;
+  
+  overflow: hidden;
+  border-radius: 10px;
+  // backdrop-filter: blur(6px);
+  box-shadow: 0px 0px 4px #ffd2194d;
+  bottom: 0;
+  transition: all 200ms;
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: $space-32;
+    width: 100%;
+    gap: 16px;
+    // z-index: 2;
+  
+    .image {
+      border-radius: 8px;
+      width: 100%;
+    }
+    
+    .description {
+      display: flex;
+      flex-direction: column;
+      height: -webkit-fill-available;
+
+      .subtitle {
+        font-family: sans-serif;
+        color: $paragraph;
+        margin: 0 0 8px 0;
+        font-size: $font-size-subtitle-desktop;
+        text-align: left;
+      }
+      
+      .paragraph {
+        font-family: sans-serif;
+        color: $paragraph;
+        text-align: left;
+        font-weight: 400px;
+        font-size: $font-size-paragraph-desktop;
+        margin: 0;
+      }
+    }
+
+    .button-container {
+      display: flex;
+      gap: 16px;
+      width: -webkit-fill-available;
+    }
+  }
+}
+
+.card:hover {
+  box-shadow: 0px 0px 20px $card-hover-color;
+  //bottom: 10px;
+}
+
+.card-background-1, .card-background-2 {
+  opacity: .65;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transition: all 200ms;
+}
+
+/* .card-background-1 {
+  //background: $grad1;
+  background-size: 550px 100%;
+  background-position: center;
+} */
+.card-background-2 {
+  background: $grad2;
+  background-size: 550px 100%;
+  mix-blend-mode: color-burn;
+  background-position: top right;
+}
+
+.card:hover .card-background-2 {
+  background-position: bottom left; 
+  transition: all 200ms;
+}
+
+@media (max-width: 580px) {
+  .card {
+    .card-content {
+      gap: $space-16;
+      padding: $space-16;
+
+      .description {
+        .subtitle {
+          font-size: $font-size-subtitle-mobile;
+        }
+        
+        .paragraph {
+          font-size: $font-size-paragraph-mobile;
+        }
+      }
+
+      .button-container {
+        
+      }
+    }
+  }
+}

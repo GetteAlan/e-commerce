@@ -1,0 +1,24 @@
+@import '../../variables.scss';
+
+.home {
+  position: relative;
+  //top: -71px;
+  text-align: center;
+  height: calc(100vh - 100px - 32px);
+  margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
+  scroll-margin: 102px;
+  background-color: $background-accent;
+  border-radius: 10px;
+
+
+}
+
+@media (max-width: 580px) {
+  .home {
+    height: calc(100dvh - 100px);
+    margin: $space-16 $space-main-margin-mobile $space-16 $space-main-margin-mobile;
+    scroll-margin: 102px;
+
+  }
+  
+}
