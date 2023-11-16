@@ -9,10 +9,16 @@ import Menu from './components/Menu';
 
 function App() {
   const homeRef = useRef(null);
+  const accountRef = useRef(null);
+  const purchasesRef = useRef(null);
+  const offersRef = useRef(null);
   const searchRef = useRef(null);
 
   const options = [
     {title: 'Home', ref: homeRef, key: 'home-section', active: false},
+    {title: 'Account', ref: accountRef, key: 'account-section', active: false},
+    {title: 'Purchases', ref: purchasesRef, key: 'purchases-section', active: false},
+    {title: 'Offers', ref: offersRef, key: 'offers-section', active: false},
   ];
 
   return (

@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+
+.title-h2 {
+  font-family: monospace;
+  color: $color-title-h2;
+  font-size: 24px;
+  margin: 0;
+}
+
+
+@media (max-width: 580px) { 
+  .title-h2 { 
+    font-size: 18px;
+  }
+}

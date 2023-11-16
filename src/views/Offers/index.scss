@@ -1,24 +1,37 @@
 @import '../../variables.scss';
 
-.home {
-  position: relative;
-  //top: -71px;
+.offers {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
   text-align: center;
-  height: calc(100vh - 100px - 32px);
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   scroll-margin: 102px;
   background-color: $background-accent;
   border-radius: 10px;
 
+  .offers-list {
+    display: grid;
+    justify-items: center;
+    gap: 32px;
+    grid-template-columns: auto auto;
+  }
 
 }
 
 @media (max-width: 580px) {
-  .home {
-    height: calc(100dvh - 100px);
+  .offers {
     margin: $space-16 $space-main-margin-mobile $space-16 $space-main-margin-mobile;
     scroll-margin: 102px;
+    padding: 16px;
+    gap: 16px;
 
+    .offers-list {
+      gap: 16px;
+      grid-template-columns: 1fr;
+      
+    }
   }
   
 }

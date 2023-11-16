@@ -4,20 +4,61 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $background;
+    border-radius: 10px;
+    padding: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 20px -5px rgba(0,0,0,0.5);
+
+    .user-card-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;   
+      z-index: 3;
+
+      .user-img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .user-card-info {
+      text-align: center;
+    }
+    
+    .user-card-info h2 {
+      font-size: 14px;
+      margin: 0;
+      margin-bottom: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 3px;
+      color: #EDB88B;
+      text-wrap: nowrap;
+    }
+    
+    .user-card-info p {
+      font-size: 12px;
+      margin-bottom: 2px;
+      color: #EDB88B;
+    }
+
+
+  }
+
+  .menu-mobile {
+    display: none;
+  }
 }
 
-.user-card {
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- background-color: $background;
- border-radius: 10px;
- padding: 8px;
- position: relative;
- overflow: hidden;
- box-shadow: 0 2px 20px -5px rgba(0,0,0,0.5);
-}
 
 .user-card:before {
   content: '';
@@ -31,44 +72,11 @@
   transform: rotate(17deg);
 }
 
-.user-card-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;   
-  z-index: 3;
-  
-}
 
-.user-card-img img {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 50%;
-}
 
-.user-card-info {
-  text-align: center;
-}
 
-.user-card-info h2 {
-  font-size: 14px;
-  margin: 0;
-  margin-bottom: 10px;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 3px;
-  color: #EDB88B;
-  text-wrap: nowrap;
-}
 
-.user-card-info p {
-  font-size: 12px;
-  margin-bottom: 2px;
-  color: #EDB88B;
-}
-.user-card-info p span {
-  font-weight: 700;
-  margin-right: 10px;
-}
+
 
 @media only screen and (min-width: 768px) {
   .user-card {
@@ -88,23 +96,36 @@
 
 @media (max-width: 767px){
   .wrapper{
-     padding-top: 3%;
+    padding-top: 3%;
   }
+
   .user-card:before {
-     width: 300%;
-     height: 200px;
-     transform: rotate(0);
+    width: 300%;
+    height: 200px;
+    transform: rotate(0);
   }
+
   .user-card-info h2 {
-     margin-top: 25px;
-     font-size: 35px;
+    margin-top: 25px;
+    font-size: 35px;
   }
-  .user-card-info p span {
-     display: block;
-     margin-bottom: 15px;
-     font-size: 18px;
-  }
+
 }
+
 @media (max-width: 580px) { 
+  .wrapper{
+    padding: 0;
+    gap: 8px;
+
+    .user-card {
+      display: none;
+    }
+
+    .menu-mobile {
+      display: flex;
+      width: 32px;
+      height: 32px;
+    }
+  }
 
 }
