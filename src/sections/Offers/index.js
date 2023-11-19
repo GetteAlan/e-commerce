@@ -2,7 +2,7 @@ import React from 'react';
 import "./index.scss";
 
 import Title from '../../components/Title';
-import Card from '../../components/Card';
+import Product from '../../components/Product';
 import offers from '../../assets/data/offers.json';
 
 export default function Offers({reference}) {
@@ -11,11 +11,12 @@ export default function Offers({reference}) {
       <Title text="Offers" />
       <section className="offers-list">
         { offers.map((offer) => (
-          <Card 
+          <Product 
             title={offer.title} 
             description={offer.description} 
             price={offer.price}
-          ></Card>
+            to={offer.to}
+          ></Product>
         ))}
       </section>
     </section>

@@ -6,16 +6,16 @@
   padding: 32px;
   gap: 32px;
   text-align: center;
-  margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
+  //margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   scroll-margin: 102px;
   background-color: $background-accent;
   border-radius: 10px;
 
   .offers-list {
-    display: grid;
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
     justify-items: center;
-    gap: 32px;
-    grid-template-columns: auto auto;
   }
 
 }
@@ -28,8 +28,7 @@
     gap: 16px;
 
     .offers-list {
-      gap: 16px;
-      grid-template-columns: 1fr;
+
       
     }
   }

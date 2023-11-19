@@ -1,14 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./index.scss";
 
 import Logo from '../../assets/logo.svg';
 import Cart from '../../assets/cart.svg';
+import MenuMobile from '../../assets/menu-mobile.svg';
 import SearchBar from "../SearchBar";
 import Account from "../Account";
 
-export default function Menu({ options, isHomeInViewport }) {
-  const buttonClassOnShow = isHomeInViewport ? 'hide' : '';
+import Button from '../Button';
 
+export default function Menu({ options }) {
   return (
     <section className="menu-container">
       <header className="menu-header">
@@ -20,7 +22,7 @@ export default function Menu({ options, isHomeInViewport }) {
           <SearchBar />
         </div>
         <div className="extra-options">
-          <Account />
+          <img className="menu-mobile" src={MenuMobile}></img>
         </div> 
       </header>
 
@@ -29,16 +31,20 @@ export default function Menu({ options, isHomeInViewport }) {
           <ul className="options">
             { options?.map(option =>
               (<li className="option" key={option.key}>
-                <button className="option-link"
-                  type="button" 
-                  onClick={() => option.ref.current?.scrollIntoView({behavior: 'smooth'})}
-                >{option.title}</button>
+                <Link className="link" to={option.to}>
+                  <button className="option-link" type="button">{option.title}</button>
+                </Link>
               </li>)
             )}
           </ul>     
         </nav>
 
-        <img className="cart" src={Cart}></img>
+        <div className="aside-options">
+          <Link className="link" to="login">
+            <button className="option-link" type="button">Login</button>
+          </Link>
+          <img className="cart" src={Cart}></img>
+        </div>
       </section>
     </section>
   );
