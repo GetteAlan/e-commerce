@@ -11,7 +11,8 @@ export default function Offers({reference}) {
       <Title text="Offers" />
       <section className="offers-list">
         { offers.map((offer) => (
-          <Product 
+          <Product
+            id={offer.id}
             title={offer.title} 
             description={offer.description} 
             price={offer.price}

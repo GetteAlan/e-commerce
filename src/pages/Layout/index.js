@@ -8,7 +8,6 @@ const Layout = () => {
     {title: 'Search', to: '/search', key: 'search-section', },
     {title: 'Purchases', to: '/purchases', key: 'purchases-section', },
     {title: 'Account', to: '/account', key: 'account-section', },
-    {title: 'Login', to: '/login', key: 'login-section', },
   ];
 
   return (

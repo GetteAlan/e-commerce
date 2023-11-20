@@ -1,0 +1,55 @@
+@import '../../variables.scss';
+
+.menu-button {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+
+    .link {
+        text-decoration: none;
+
+        .option-link {
+            position: relative;
+            display: block;
+            padding: 4px 0;
+            font-family: "Bebas Neue", sans-serif;
+            color: $color-title-h2;
+            text-decoration: none;
+            //text-transform: uppercase;
+            transition: 0.3s;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: 400;
+
+            &::after {
+                position: absolute;
+                content: "";
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: $color-paragraph;
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 0.3s;
+            }
+
+            &:hover {
+                color: $color-paragraph;
+                cursor: pointer;
+            }
+
+            &:hover::after {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+        }
+    }
+}
+
+@media (max-width: 580px) {
+    .menu-button {
+        padding: 8px;
+    }
+}

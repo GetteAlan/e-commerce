@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-.login {
+.cart {
   //height: 100vh;
   text-align: center;
   width: -webkit-fill-available;
@@ -13,42 +13,35 @@
   padding: 32px;
   border-radius: 10px;
   align-items: center;
+  gap: 32px;
 
-  .login-container {
-    width: 324px;
-    background-color: $background-accent;
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //height: 100vh;
+  }
+
+  .cart-container {
+    width: -webkit-fill-available;
+    //background-color: $background-accent;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    padding: 32px;
     flex-direction: column;
-    margin: $space-32 $space-main-margin-desktop;
-    height: fit-content;
+    //margin: $space-32;
+    height: -webkit-fill-available;
     gap: 32px;
 
-    .inputs-container {
+    .products-container {
+      //background-color: $background-accent;
       display: flex;
       flex-direction: column;
       gap: 16px;
+      //padding: 16px;
       width: -webkit-fill-available;
-
-      .input {
-        width: auto;
-        height: 28px;
-        font-family: monospace;
-        outline: none;
-        border: 1px solid #dadada;
-        padding: 6px;
-        border-radius: 5px;
-        background-color: #f3f7fe;
-        transition: .3s;
-        color: #3b82f6;
-      }
-      
-      .input:focus {
-        border: 1px solid #3b82f6;
-        box-shadow: 0 0 0 4px #3b83f65f
-      }
+      //overflow-y: scroll;
+      // height: -webkit-fill-available;
     }
 
     .button-container {

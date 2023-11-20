@@ -10,12 +10,13 @@ export default function BestSellers({reference}) {
     <section className="best-sellers" ref={reference}>
       <Title text="Best Sellers" />
       <section className="best-sellers-list">
-        { bestSellers.map((offer) => (
-          <Product 
-            title={offer.title} 
-            description={offer.description} 
-            price={offer.price}
-            to={offer.to}
+        { bestSellers.map((product) => (
+          <Product
+            id={product.id}
+            title={product.title} 
+            description={product.description} 
+            price={product.price}
+            to={product.to}
           ></Product>
         ))}
       </section>
