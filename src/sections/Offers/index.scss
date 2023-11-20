@@ -10,7 +10,8 @@
   scroll-margin: 102px;
   background-color: $background-accent;
   border-radius: 10px;
-
+  align-items: start;
+  
   .offers-list {
     display: flex;
     flex-flow: wrap;

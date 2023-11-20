@@ -36,7 +36,7 @@ export default function ProductPreview({
           <div className="card-subtitle">{description}</div>
         </div>
         <div className="card-options">
-          <div className="button-container">
+          <div className="options-container">
             {/* <Button text="Buy" handleClick={handleClick}></Button> */}
             <IncreaseDecreaseInput value={count}></IncreaseDecreaseInput>
           </div>

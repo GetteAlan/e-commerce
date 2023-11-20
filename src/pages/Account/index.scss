@@ -12,7 +12,8 @@
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
-
+  align-items: start;
+  
   .container {
     background-color: $background-accent;
     border-radius: 10px;

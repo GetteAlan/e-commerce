@@ -1,7 +1,6 @@
 @import '../../variables.scss';
 
 .search {
-  height: 100vh;
   text-align: center;
   width: -webkit-fill-available;
   position: relative;
@@ -12,23 +11,36 @@
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
+  align-items: start;
+  gap: 32px;
 
-  .container {
-    background-color: $background-accent;
+  .search-list {
+    //background-color: $background-accent;
     border-radius: 10px;
     display: flex;
-    flex-direction: column;
-    margin: $space-32 $space-main-margin-desktop;
+    flex-flow: row;
+    flex-wrap: wrap;
+    //margin: $space-32 $space-main-margin-desktop;
     height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    gap: 16px;
 
-    .content {
+    .empty-container {
       display: flex;
       justify-content: center;
+      align-items: center;
+      margin: 32px;
 
-      margin: $space-32;
-   
+      .shop {
+        width: 256px;
+      }
+  
+      .text {
+        font-size: 24px;
+        font-weight: 400;
+        color: $color-title-h2;
+      }
     }
-
   }
 }
 

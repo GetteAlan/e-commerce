@@ -32,8 +32,8 @@ export default function Product({
   };
 
   return (
-    <Card to={to}>
-      <div className="product">
+    <div className="product">
+      <Card to={to}>
         <div class="card-img"><div class="img"></div></div>
         <div class="card-title">{title}</div>
         <div class="card-subtitle">{description}</div>
@@ -44,7 +44,7 @@ export default function Product({
             <Button text="Buy" handleClick={handleClick}></Button>
           </div>
         </div>
-      </div>
-    </Card>    
+      </Card>
+    </div>  
   );
 }

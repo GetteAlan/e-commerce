@@ -6,7 +6,6 @@ import Logo from '../../assets/logo.svg';
 import Cart from '../../assets/cart.svg';
 import MenuMobile from '../../assets/menu-mobile.svg';
 import SearchBar from "../SearchBar";
-import Account from "../Account";
 
 import Button from '../Button';
 import MenuButton from "../MenuButton";
@@ -41,6 +40,7 @@ export default function Menu({ options }) {
         </nav>
 
         <div className="aside-options">
+          <MenuButton text="Account" to="account"></MenuButton>
           <MenuButton text="Login" to="login"></MenuButton>
           <Link className="cart-link" to="cart">
             <img className="cart-svg" src={Cart}></img>
