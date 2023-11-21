@@ -1,39 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./index.scss";
 
 import Title from '../../components/Title';
 import Product from '../../components/Product';
+import SearchFilters from '../../components/SearchFilters';
 import Shop from '../../assets/shop.svg';
-import products from '../../assets/data/products.json';
+import productsData from '../../assets/data/products.json';
+
+const filters = [
+  {content: "Product", value: "123"},
+  {content: "Shipping", value: "123"}
+];
 
 export default function Search({reference}) {
-  //let products = [];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState('tools');
 
   useEffect(()=> {
+    const category = searchParams.get("category");
 
-  }, [])
+    if (category) {
+      setCategory(category);
+    }    
+  }, []);
+
+  const search = () => {
+    const result = productsData.filter((product) => product.category === category);
+    console.log('category:', category);
+    console.log('result', result);
+    setProducts(result);
+  }
 
   return (
     <section className="search" ref={reference}>
       <Title text="Search" />
-      <section className="search-list">
-        { products.length === 0 && (
-          <div className="empty-container">
-            <img className="shop" src={Shop}></img>
-            <h2 className="text">No results was found...</h2>
-          </div>
-        )}
-        { products.map((product) => (
-          <Product
-            id={product.id}
-            title={product.title} 
-            description={product.description} 
-            price={product.price}
-            to={product.to}
-          ></Product>
-        ))}
-
+      <section className="search-container">
+        <section className="search-list">
+          { products.length === 0 && (
+            <div className="empty-container">
+              <img className="shop" src={Shop}></img>
+              <h2 className="text">No results was found...</h2>
+            </div>
+          )}
+          { products.map((product) => (
+            <Product
+              id={product.id}
+              title={product.title} 
+              description={product.description} 
+              price={product.price}
+              to={product.to}
+            ></Product>
+          ))}
+        </section>
+        <section className="filters-container">
+          <SearchFilters title="Filters" filters={filters} total="123123" handleClick={search}/>
+        </section>
       </section>
     </section>
   );

@@ -1,26 +1,26 @@
 [
     {
         "content": "Computers",
-        "to": ""
+        "to": "search?category=computers"
     },
     {
         "content": "Home",
-        "to": ""
+        "to": "search?category=home"
     },
     {
         "content": "Beauty",
-        "to": ""
+        "to": "search?category=beauty"
     },
     {
         "content": "Tools",
-        "to": ""
+        "to": "search?category=tools"
     },
     {
         "content": "Books",
-        "to": ""
+        "to": "search?category=books"
     },
     {
         "content": "Pets",
-        "to": ""
+        "to": "search?category=pets"
     }
 ]
