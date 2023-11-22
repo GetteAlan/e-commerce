@@ -8,7 +8,7 @@ import Search from './pages/Search';
 import Account from './pages/Account';
 import Purchases from './pages/Purchases';
 import Cart from './pages/Cart';
-import Favorites from './pages/Cart';
+import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import './index.scss';
 

@@ -27,11 +27,16 @@ export default function Search({reference}) {
     }    
   }, []);
 
-  const search = () => {
-    const result = productsData.filter((product) => product.category === category);
-    console.log('category:', category);
-    console.log('result', result);
-    setProducts(result);
+  const search = async () => {
+    // const result = productsData.filter((product) => product.category === category);
+    let products = [];
+
+    const response = await fetch('https://e-commerce.gettealan.com/api/v1/products');
+    console.log('response:', response.json());
+
+    //console.log('category:', category);
+    //console.log('result', result);
+    setProducts(products);
   }
 
   return (

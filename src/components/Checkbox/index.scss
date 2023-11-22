@@ -1,0 +1,70 @@
+@import '../../variables.scss';
+
+/* check box
+---------------------------------------------------------*/
+.form__privacy {
+  display: flex;
+  align-items: center;
+}
+
+/* Default style reset */
+[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  appearance: none;
+}
+
+[type="checkbox"] {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+  }
+
+  &::after {
+    top: 9px;
+    left: 7px;
+    width: 12px;
+    height: 5px;
+    border-bottom: 3px solid #ee8013;
+    border-left: 3px solid #ee8013;
+    transform: rotate(-45deg);
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+
+  &:checked::after {
+    opacity: 1;
+  }
+}
+
+.label-checkbox {
+  margin-left: 8px;
+  color: $color-title-h2;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+@media (max-width: 580px) { 
+
+}

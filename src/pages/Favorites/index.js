@@ -19,7 +19,7 @@ export default function Favorites({reference}) {
 
   return (
     <section className="cart" ref={reference}>
-      <Title text="Cart"/>
+      <Title text="Favorites"/>
       <section className="cart-container">
         <div className="products-container">
           { isLoading && (
@@ -34,10 +34,7 @@ export default function Favorites({reference}) {
             <ProductPreview id={product.id} title={product.title} description={product.description} price={product.price} count={product.count}></ProductPreview>
           ))}
         </div>
-        <div className="button-container">
-          <Button text="Buy"></Button>
-          <Button text="Sing up" hierarchy="secondary"></Button>
-        </div>
+
       </section>
     </section>
   );

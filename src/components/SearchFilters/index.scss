@@ -26,6 +26,12 @@
     }
   }
 
+  .subtitle {
+    font-size: 16px;
+    color: $color-title-h2;
+    margin-bottom: 8px;
+  }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -36,6 +42,28 @@
       display: flex;
       justify-content: space-between;
     }
+
+    .section-filters {
+      margin-top: 16px;
+
+      .condition-container {
+        display: flex;
+        gap: 16px;
+      }
+
+      .price-container {
+        display: flex;
+        gap: 8px;
+      }
+
+      .categories-container {
+        display: flex;
+        flex-flow: wrap;
+        gap: 12px;
+      }
+    }
+
+
 
     .paragraph {
       font-size: 14px;
