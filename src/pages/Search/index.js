@@ -19,9 +19,17 @@ export default function Search({reference}) {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState('tools');
 
-  useEffect(()=> {
+  useEffect(() => {
     const category = searchParams.get("category");
+    let categories = [];
 
+    fetch('https://e-commerce.gettealan.com/api/v1/categories')
+    .then((response) => {
+      categories = response;
+    }).catch((error) => {
+      console.log('Error', error);
+    });
+    
     if (category) {
       setCategory(category);
     }    
