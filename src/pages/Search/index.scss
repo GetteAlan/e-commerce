@@ -23,6 +23,7 @@
       //background-color: $background-accent;
       border-radius: 10px;
       display: flex;
+      justify-content: center;
       flex-flow: row;
       flex-wrap: wrap;
       //margin: $space-32 $space-main-margin-desktop;
@@ -32,12 +33,14 @@
   
       .empty-container {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 32px;
   
         .shop {
           width: 256px;
+          filter: invert(97%) sepia(6%) saturate(185%) hue-rotate(138deg) brightness(97%) contrast(96%);
         }
     
         .text {

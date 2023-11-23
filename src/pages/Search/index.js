@@ -6,7 +6,8 @@ import "./index.scss";
 import Title from '../../components/Title';
 import Product from '../../components/Product';
 import SearchFilters from '../../components/SearchFilters';
-import Shop from '../../assets/shop.svg';
+import Loading from '../../components/Loading';
+import EmptyBox from '../../assets/empty-box.svg';
 import productsData from '../../assets/data/products.json';
 
 const filters = [
@@ -15,17 +16,23 @@ const filters = [
 ];
 
 export default function Search({reference}) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState('tools');
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const category = searchParams.get("category");
-    let categories = [];
 
     fetch('https://e-commerce.gettealan.com/api/v1/categories')
     .then((response) => {
-      categories = response;
+      response.json().then((result) => {
+        setCategories(result);
+        setIsLoading(false);
+      });
+      
     }).catch((error) => {
       console.log('Error', error);
     });
@@ -36,42 +43,46 @@ export default function Search({reference}) {
   }, []);
 
   const search = async () => {
-    // const result = productsData.filter((product) => product.category === category);
-    let products = [];
-
+    setProducts(null);
+    setIsSearchLoading(true);
     const response = await fetch('https://e-commerce.gettealan.com/api/v1/products');
-    console.log('response:', response.json());
-
-    //console.log('category:', category);
-    //console.log('result', result);
+    const products = await response.json();
     setProducts(products);
+    setIsSearchLoading(false);
   }
 
   return (
-    <section className="search" ref={reference}>
-      <Title text="Search" />
-      <section className="search-container">
-        <section className="search-list">
-          { products.length === 0 && (
-            <div className="empty-container">
-              <img className="shop" src={Shop}></img>
-              <h2 className="text">No results was found...</h2>
-            </div>
-          )}
-          { products.map((product) => (
-            <Product
-              id={product.id}
-              title={product.title} 
-              description={product.description} 
-              price={product.price}
-              to={product.to}
-            ></Product>
-          ))}
-        </section>
-        <section className="filters-container">
-          <SearchFilters title="Filters" filters={filters} total="123123" handleClick={search}/>
-        </section>
-      </section>
-    </section>
+    <>
+      { isLoading ? (<Loading />) : (
+        <>
+          <section className="search" ref={reference}>
+          <Title text="Search" />
+          <section className="search-container">
+            <section className="search-list">
+              { isSearchLoading && (<Loading />)}
+              { products?.length === 0 && (
+                <div className="empty-container">
+                  <img className="shop" src={EmptyBox}></img>
+                  <h2 className="text">No results was found...</h2>
+                </div>
+              )}
+              { products?.map((product) => (
+                <Product
+                  id={product.id}
+                  title={product.name} 
+                  description={product.description} 
+                  price={product.price}
+                  to={product.to}
+                ></Product>
+              ))}
+            </section>
+            <section className="filters-container">
+              <SearchFilters filters={filters} categories={categories} handleClick={search}/>
+            </section>
+          </section>
+          </section>
+        </>
+      )} 
+    </>
   );
 }
