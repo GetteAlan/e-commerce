@@ -9,10 +9,12 @@ export default function Product({
   title, 
   description, 
   price,
-  image,
+  productImage,
   to }) {
   const [idProduct, setIdProduct] = useState(id);
 
+  
+  
   const handleClick = () => {
     let cartProducts = JSON.parse(localStorage.getItem('products-cart'));
     const product = {
@@ -34,9 +36,15 @@ export default function Product({
   return (
     <div className="product">
       <Card to={to}>
-        <div class="card-img"><div class="img"></div></div>
-        <div class="card-title">{title}</div>
-        <div class="card-subtitle">{description}</div>
+        <div class="product-image-container">
+          <img class="product-image" src={`images/products/${id}-thumbnail.webp`} alt={title}></img>
+        </div>
+        <div class="card-title">
+          <h3 className="product-title">{title}</h3>
+        </div>
+        <div className="card-description">
+          <span class="product-description">{description}</span>
+        </div>       
         <hr class="card-divider" />
         <div class="card-footer">
           <div class="card-price">{price}</div>

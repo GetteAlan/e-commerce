@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.blockquote, q {
+  quotes: none;
+}
+
+@media (max-width: 580px) { 
+  .blockquote { 
+
+  }
+}

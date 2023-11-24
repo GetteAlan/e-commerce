@@ -27,7 +27,7 @@ export default function SearchFilters({
   console.log('setFilterCategories', filterCategories);
 
   return (
-    <section className="summary">
+    <section className="search-filters">
       <div className="header">
         <h2 className="subtitle">Filters</h2>
       </div>

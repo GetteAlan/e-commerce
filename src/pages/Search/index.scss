@@ -23,7 +23,7 @@
       //background-color: $background-accent;
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      //justify-content: center;
       flex-flow: row;
       flex-wrap: wrap;
       //margin: $space-32 $space-main-margin-desktop;
@@ -36,6 +36,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: -webkit-fill-available;
         margin: 32px;
   
         .shop {
@@ -52,7 +53,7 @@
     }
   
     .filters-container {
-      width: 512px;
+      width: 35%;
     }
   }
 
