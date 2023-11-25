@@ -9,6 +9,7 @@ export default function Product({
   title, 
   description, 
   price,
+  shippingCost,
   productImage,
   to }) {
   const [idProduct, setIdProduct] = useState(id);
@@ -47,7 +48,11 @@ export default function Product({
         </div>       
         <hr class="card-divider" />
         <div class="card-footer">
-          <div class="card-price">{price}</div>
+          <div className="footer-description">
+            <span class="card-price">{price}</span>
+            <span class="shipping">{shippingCost}</span>
+          </div>
+          
           <div className="button-container">
             <Button text="Buy" handleClick={handleClick}></Button>
           </div>

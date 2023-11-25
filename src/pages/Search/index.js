@@ -42,16 +42,20 @@ export default function Search({reference}) {
     }    
   }, []);
 
-  const search = async () => {
+  const search = async (event) => {
+    // event.preventDefault();
+
     setProducts(null);
     setIsSearchLoading(true);
     const response = await fetch('https://e-commerce.gettealan.com/api/v1/products');
     const products = await response.json();
 
     const productTransformed = products.map((product) => {
+      const shippingCost = product.shipping_cost ? `US$ ${product.shipping_cost}` : 'FREE';
       return {
         ...product,
-        price: `USD ${product.price}`,
+        price: `US$ ${product.price}`,
+        shipping_cost: shippingCost,
       }
     });
     setProducts(productTransformed);
@@ -79,7 +83,8 @@ export default function Search({reference}) {
                   title={product.name} 
                   description={product.description} 
                   price={product.price}
-                  to={product.to}
+                  shippingCost={product.shipping_cost}
+                  to={`/product-detail/${product.id}`}
                 ></Product>
               ))}
             </section>
