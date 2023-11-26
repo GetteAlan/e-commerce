@@ -18,9 +18,9 @@ export default function Favorites({reference}) {
   }, []);
 
   return (
-    <section className="cart" ref={reference}>
+    <section className="favorites" ref={reference}>
       <Title text="Favorites"/>
-      <section className="cart-container">
+      <section className="favorites-container">
         <div className="products-container">
           { isLoading && (
             <div className="loading-container">

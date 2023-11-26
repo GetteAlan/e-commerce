@@ -13,55 +13,75 @@
   padding: 32px;
   border-radius: 10px;
   align-items: start;
+  gap: 32px;
 
   .login-container {
-    width: 324px;
-    background-color: $background-accent;
-    border-radius: 10px;
+    width: -webkit-fill-available;
     display: flex;
     align-items: center;
-    padding: 32px;
     flex-direction: column;
-    margin: $space-32 $space-main-margin-desktop;
+    //margin: $space-32 $space-main-margin-desktop;
     height: fit-content;
-    gap: 32px;
 
-    .inputs-container {
+    .login-form {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      width: -webkit-fill-available;
+      width: 324px;
+      gap: 32px;
+      background-color: $background-accent;
+      border-radius: 10px;
+      padding: 32px;
 
-      .input {
-        width: auto;
-        height: 28px;
-        font-family: monospace;
-        outline: none;
-        border: 1px solid #dadada;
-        padding: 6px;
-        border-radius: 5px;
-        background-color: #f3f7fe;
-        transition: .3s;
-        color: #3b82f6;
+      .inputs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: -webkit-fill-available;
+  
+        .input {
+          width: auto;
+          height: 28px;
+          font-family: monospace;
+          outline: none;
+          border: 1px solid #dadada;
+          padding: 6px;
+          border-radius: 5px;
+          background-color: #f3f7fe;
+          transition: .3s;
+          color: #3b82f6;
+        }
+        
+        .input:focus {
+          border: 1px solid #3b82f6;
+          box-shadow: 0 0 0 4px #3b83f65f
+        }
       }
-      
-      .input:focus {
-        border: 1px solid #3b82f6;
-        box-shadow: 0 0 0 4px #3b83f65f
+  
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        width: -webkit-fill-available;
+        gap: 16px;
       }
     }
-
-    .button-container {
-      display: flex;
-      flex-direction: row;
-      width: -webkit-fill-available;
-      gap: 16px;
-    }
-
-
   }
 
+  .messages-wrapper {
+    
 
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: green
+    }
+
+    .message {
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
 }
 
 @media (max-width: 580px) {

@@ -7,12 +7,16 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import Loading from '../../components/Loading';
+import Tag from '../../components/Tag';
 
 export default function ProductDetail({reference}) {
   const [isLoading, setIsLoading] = useState(true);
   const [cartProducts, setCartProducts] = useState([]);
   const [product, setProduct] = useState(null);
   const { idProduct } = useParams();
+  const freeTagColor = '#e6f7ee';
+  const freeTagBorderColor = '#1c6415';
+  const freeTagTextColor = '#00a650';
 
   useEffect(() => {
     console.log('idProduct', idProduct);
@@ -22,15 +26,15 @@ export default function ProductDetail({reference}) {
     .then((response) => {
       response.json().then((result) => {
         const product = result[0];
-        const shippingCost = product.shipping_cost ? `US$ ${product.shipping_cost}` : 'FREE';
-
-        const productTransformed = {
+        //const shippingCost = product.shipping_cost ? `US$ ${product.shipping_cost}` : 'FREE';
+console.log('', product.shipping_cost);
+/*         const productTransformed = {
           ...product,
           price: `US$ ${product.price}`,
           shipping_cost: shippingCost,
-        };        
+        };    */     
 
-        setProduct(productTransformed);
+        setProduct(product);
        //setIsLoading(false);
       });
       
@@ -59,11 +63,15 @@ export default function ProductDetail({reference}) {
           <section className="product-purchase card-styled">
             <div>
               <h3>Price</h3>
-              <p className="paragraph">{product.price}</p>
+              <p className="paragraph">US$ {product.price}</p>
             </div>
             <div>
               <h3>Shipping cost</h3>
-              <p className="paragraph">{product.shipping_cost}</p>
+              { product.shipping_cost > 0.00 ? (
+                <p className="paragraph">US$ {product.shipping_cost}</p>
+              ) : (
+                <Tag color={freeTagColor} borderColor={freeTagBorderColor} textColor={freeTagTextColor}>Free</Tag>
+              )}
             </div>
             <Button text={'Add to cart'}></Button>
           </section>

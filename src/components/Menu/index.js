@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
 
@@ -6,11 +6,21 @@ import Logo from '../../assets/logo.svg';
 import Cart from '../../assets/cart.svg';
 import MenuMobile from '../../assets/menu-mobile.svg';
 import SearchBar from "../SearchBar";
-
-import Button from '../Button';
 import MenuButton from "../MenuButton";
 
 export default function Menu({ options }) {
+  const [cartCounter, setCartCounter] = useState(0);
+  const [isLogged, setIsLogged] = useState(false);
+
+  const handlingClickLogout = () => {
+    setIsLogged(false);
+  };
+
+  useEffect(() => {
+    const cartProducts = JSON.parse(localStorage.getItem('products-cart'));
+    setCartCounter(cartProducts.length);
+  }, []);
+
   return (
     <section className="menu-container">
       <header className="menu-header">
@@ -41,10 +51,14 @@ export default function Menu({ options }) {
 
         <div className="aside-options">
           <MenuButton text="Account" to="account"></MenuButton>
-          <MenuButton text="Login" to="login"></MenuButton>
-          <Link className="cart-link" to="cart">
-            <img className="cart-svg" src={Cart}></img>
-          </Link>          
+          { isLogged ? (<MenuButton text="Logout" to="home" handlingClick={handlingClickLogout}></MenuButton>) : (<MenuButton text="Login" to="login"></MenuButton>)}
+          
+          <div className="cart-link-container">
+            <span className="cart-counter">{cartCounter}</span>
+            <Link className="cart-link" to="cart">
+              <img className="cart-svg" src={Cart}></img>
+            </Link>   
+          </div>       
         </div>
       </section>
     </section>

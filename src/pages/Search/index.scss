@@ -1,5 +1,13 @@
 @import '../../variables.scss';
 
+.search-loading {
+  align-items: center;
+  height: 84vh;
+  width: 100wh;
+  display: flex;
+  justify-content: center;
+}
+
 .search {
   text-align: center;
   width: -webkit-fill-available;

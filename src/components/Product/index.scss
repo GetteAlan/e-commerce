@@ -1,13 +1,6 @@
 @import '../../variables.scss';
 
-/* before adding the img to the div with the 
-"card-img" class, remove css styles 
-.card-img .img::before and .card-img .img::after,
-then set the desired styles for .card-img. */
 .product {
-  --font-color: #323232;
-  --font-color-sub: #666;
-  --bg-color: #fff;
   --main-color: #323232;
   --main-focus: #2d8cf0;
   width: 256px;
@@ -23,6 +16,8 @@ then set the desired styles for .card-img. */
     transition: all 0.5s;
     display: flex;
     justify-content: center;
+    background: white;
+    border-radius: 2px;
 
     .product-image {
       float: left;
@@ -64,8 +59,6 @@ then set the desired styles for .card-img. */
     }
   }
 
-
-
   .card-divider {
     width: 100%;
     border: 1px solid var(--main-color);
@@ -87,25 +80,55 @@ then set the desired styles for .card-img. */
         font-size: 20px;
         font-weight: 600;
         color: $color-paragraph;
+
+        span {
+          font-size: 20px;
+          font-weight: 500;
+          color: $color-title-h2;
+        }
       }
 
       .shipping {
         font-size: 14px;
         font-weight: 400;
         color: $color-paragraph;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        line-height: 14px;
       }
-    }
-
-
-    
-    .card-price span {
-      font-size: 20px;
-      font-weight: 500;
-      color: $color-title-h2;
     }
         
     .button-container {
       width: 64px;
+
+      .cart-link {
+        .cart-svg {
+            width: 32px;
+            filter: invert(97%) sepia(6%) saturate(185%) hue-rotate(138deg) brightness(97%) contrast(96%);
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1); 
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1); 
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+
+            &:hover {
+                // box-shadow: 0px 0px 10px #000000;
+                z-index: 2;
+                -webkit-transition: all 200ms ease-in;
+                -webkit-transform: scale(1.3);
+                -ms-transition: all 200ms ease-in;
+                -ms-transform: scale(1.3);   
+                -moz-transition: all 200ms ease-in;
+                -moz-transform: scale(1.3);
+                transition: all 200ms ease-in;
+                transform: scale(1.3);
+            }
+        }
+    }
     }
   }  
   

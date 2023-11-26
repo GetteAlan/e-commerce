@@ -50,21 +50,13 @@ export default function Search({reference}) {
     const response = await fetch('https://e-commerce.gettealan.com/api/v1/products');
     const products = await response.json();
 
-    const productTransformed = products.map((product) => {
-      const shippingCost = product.shipping_cost ? `US$ ${product.shipping_cost}` : 'FREE';
-      return {
-        ...product,
-        price: `US$ ${product.price}`,
-        shipping_cost: shippingCost,
-      }
-    });
-    setProducts(productTransformed);
+    setProducts(products);
     setIsSearchLoading(false);
   }
 
   return (
     <>
-      { isLoading ? (<Loading />) : (
+      { isLoading ? (<section className="search-loading"><Loading /></section> ) : (
         <>
           <section className="search" ref={reference}>
           <Title text="Search" />
