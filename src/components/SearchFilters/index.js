@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Button from '../../components/Button';
 import Checkbox from "../Checkbox";
 import InputText from "../InputText";
-//* import Categories from '../../assets/data/categories.json';
 import "./index.scss";
 
 export default function SearchFilters({
@@ -15,16 +14,28 @@ export default function SearchFilters({
   handleClick,
   children,
 }) {
-  const [filterCategories, setFilterCategories] = useState([]);
-  const handleClickCategory = (category) => {
-    if (category === 'All') {
-      setFilterCategories([category]);
-    } else if (!filterCategories.includes(category)) {
-      setFilterCategories(filterCategories.concat([category]))
-    }
-  };
+  const [filterCategories, setFilterCategories] = useState(categories);
+  
+  const handleClickCategory = (e, category) => {
+    const isChecked = e.target.checked;
+    const isAllChecked = categories[0].checked;
 
-  console.log('setFilterCategories', filterCategories);
+    const newCategories = categories.map((element) => {
+      if (category === 'All') {
+        if (element.name !== 'All') {
+          element.checked = false;
+        } else {
+          element.checked = isChecked;
+        }
+      } else if (element.name === category && !isAllChecked) {
+        element.checked = isChecked;
+      }
+
+      return element;
+    });
+
+    setFilterCategories(newCategories);
+  };  
 
   return (
     <section className="search-filters">
@@ -52,9 +63,8 @@ export default function SearchFilters({
         <div className="section-filters">
           <h2 className="subtitle">Categories</h2>
           <div className="categories-container">
-            <Checkbox id="0" text="All" handleClick={() => handleClickCategory('All')}></Checkbox>
             { categories.map((category) => (
-              <Checkbox id={category.id} text={category.name} handleClick={() => handleClickCategory(category.name)}></Checkbox>
+              <Checkbox id={category.id} text={category.name} handleClick={(e) => handleClickCategory(e, category.name)} checked={category.checked}></Checkbox>
             ))}
           </div>
         </div>

@@ -41,16 +41,14 @@ export default function Login({reference}) {
       const token = result?.token;
       const account = result?.account;
 
+      setAccount(account);
+      setToken(token);
+
       if (token && account) {
-        setAccount(account);
-        setToken(token);
         navigate('/');
 
         return;
       }
-
-      setAccount();
-      setToken();
 
       throw new Error('Error login');
     }).catch((error) => {
