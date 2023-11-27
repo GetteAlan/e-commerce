@@ -38,7 +38,7 @@ export default function Cart({reference}) {
               <span>No hay productos.</span>
             )}
             { cartProducts.map((product) => (
-              <ProductPreview id={product.id} title={product.title} description={product.description} price={product.price} count={product.count}></ProductPreview>
+              <ProductPreview id={product.id} title={product.title} price={product.price} count={product.count}></ProductPreview>
             ))}
           </div>
         </section>

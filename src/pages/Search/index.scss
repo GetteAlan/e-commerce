@@ -6,6 +6,11 @@
   width: 100wh;
   display: flex;
   justify-content: center;
+
+  .search-wrapper {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 .search {

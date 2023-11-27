@@ -5,10 +5,12 @@ import "./index.scss";
 
 import Title from '../../components/Title';
 import Button from '../../components/Button';
+import Loading from '../../components/Loading';
+import { useAuth } from "../../providers/authProvider";
 
 export default function Login({reference}) {
-  const [token, setToken] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const { setToken, setAccount } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [errorLogin, setErrorLogin] = useState(false);
@@ -16,6 +18,12 @@ export default function Login({reference}) {
 
   const onSubmitHandling = (event) => {
     event.preventDefault();
+
+    if (!username || !password) {
+      return;
+    }
+
+    setIsLoading(true);
     setErrorLogin(false);
 
     fetch('https://e-commerce.gettealan.com/api/v1/login', {
@@ -28,23 +36,27 @@ export default function Login({reference}) {
         password,
       })
     })
-    .then((response) => {
-      response.json().then((result) => {
+    .then(async (response) => {
+      const result = await response.json();
+      const token = result?.token;
+      const account = result?.account;
 
-        if (result?.token) {
-          sessionStorage.setItem('token', JSON.stringify(result.token));
-          navigate('/');
+      if (token && account) {
+        setAccount(account);
+        setToken(token);
+        navigate('/');
 
-          return;
-        }
+        return;
+      }
 
+      setAccount();
+      setToken();
 
-        throw new Error('Error login');
-
-        //setIsLoading(false);
-      });
+      throw new Error('Error login');
     }).catch((error) => {
       console.log('Error', error);
+      setAccount();
+      setToken();
       setErrorLogin(true);
     }).finally(() => {
       setIsLoading(false);
@@ -65,16 +77,23 @@ export default function Login({reference}) {
       <Title text="Login"/>
       <section className="login-container">
         <form className="login-form" onSubmit={onSubmitHandling}>
-          <div className='inputs-container'>
-            <input placeholder="email" className="input" name="email" type="text" onChange={e => setUsername(e.target.value)} />
-            <input placeholder="password" className="input" name="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <div className="inputs-container">
+            <input placeholder="email" className="input" name="email" type="text" onChange={e => setUsername(e.target.value)} disabled={isLoading}/>
+            <input placeholder="password" className="input" name="password" type="password" onChange={e => setPassword(e.target.value)} disabled={isLoading}/>
           </div>
           <div className="button-container">
-            <Button text="Sing in"></Button>
-            <Button text="Sing up" hierarchy="secondary"></Button>
+            { isLoading ? (
+              <div className="loading-wrapper">
+                <Loading />
+              </div>              
+            ) : (
+              <>
+                <Button text="Sing in"></Button>
+                <Button text="Sing up" hierarchy="secondary"></Button>
+              </>
+            )}
           </div>
         </form>
-
       </section>
       { errorLogin && (
         <section className="messages-wrapper">

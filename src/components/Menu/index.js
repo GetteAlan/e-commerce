@@ -7,19 +7,29 @@ import Cart from '../../assets/cart.svg';
 import MenuMobile from '../../assets/menu-mobile.svg';
 import SearchBar from "../SearchBar";
 import MenuButton from "../MenuButton";
+import { useAuth } from "../../providers/authProvider";
 
 export default function Menu({ options }) {
   const [cartCounter, setCartCounter] = useState(0);
   const [isLogged, setIsLogged] = useState(false);
+  const { account, token, setToken, setAccount } = useAuth();
 
   const handlingClickLogout = () => {
-    setIsLogged(false);
+    setToken(null);
+    setAccount(null);
   };
 
   useEffect(() => {
     const cartProducts = JSON.parse(localStorage.getItem('products-cart'));
     setCartCounter(cartProducts.length);
   }, []);
+
+  useEffect(() => {
+    setIsLogged(account && token);
+  }, [account, token]);
+
+  const logoutOption = <MenuButton text="Logout" to="/" handlingClick={handlingClickLogout}></MenuButton>;
+  const loginOption = <MenuButton text="Login" to="login"></MenuButton>;
 
   return (
     <section className="menu-container">
@@ -36,6 +46,10 @@ export default function Menu({ options }) {
         </div> 
       </header>
 
+      <section className="menu-username">
+        <span className="username">{`Welcome ${account ? account.username : 'user'}!`}</span>
+      </section>
+
       <section className="menu-content">
         <nav className="menu">
           <ul className="options">
@@ -51,14 +65,13 @@ export default function Menu({ options }) {
 
         <div className="aside-options">
           <MenuButton text="Account" to="account"></MenuButton>
-          { isLogged ? (<MenuButton text="Logout" to="home" handlingClick={handlingClickLogout}></MenuButton>) : (<MenuButton text="Login" to="login"></MenuButton>)}
-          
+          { isLogged ? (logoutOption) : (loginOption)}
           <div className="cart-link-container">
             <span className="cart-counter">{cartCounter}</span>
             <Link className="cart-link" to="cart">
               <img className="cart-svg" src={Cart}></img>
             </Link>   
-          </div>       
+          </div>             
         </div>
       </section>
     </section>

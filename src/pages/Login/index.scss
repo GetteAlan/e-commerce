@@ -62,6 +62,12 @@
         flex-direction: row;
         width: -webkit-fill-available;
         gap: 16px;
+        justify-content: center;
+
+        .loading-wrapper {
+          width: 45px;
+          height: 45px;
+        }
       }
     }
   }

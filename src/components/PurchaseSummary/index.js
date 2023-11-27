@@ -26,7 +26,7 @@ export default function PurchaseSummary({
           </div>
         ))}
         <div className="content-key-value margin-top-16">
-          <span className="paragraph strong">Total:</span>
+          <span className="paragraph strong">Total</span>
           <span className="paragraph">{total}</span>
         </div>
       </div>

@@ -56,34 +56,39 @@ export default function Search({reference}) {
 
   return (
     <>
-      { isLoading ? (<section className="search-loading"><Loading /></section> ) : (
+      { isLoading ? (
+        <section className="search-loading">
+          <div className="search-wrapper">
+            <Loading />
+          </div>          
+        </section> ) : (
         <>
           <section className="search" ref={reference}>
-          <Title text="Search" />
-          <section className="search-container">
-            <section className="search-list">
-              { isSearchLoading && (<Loading />)}
-              { products?.length === 0 && (
-                <div className="empty-container">
-                  <img className="shop" src={EmptyBox}></img>
-                  <h2 className="text">No results was found...</h2>
-                </div>
-              )}
-              { products?.map((product) => (
-                <Product
-                  id={product.id}
-                  title={product.name} 
-                  description={product.description} 
-                  price={product.price}
-                  shippingCost={product.shipping_cost}
-                  to={`/product-detail/${product.id}`}
-                ></Product>
-              ))}
+            <Title text="Search" />
+            <section className="search-container">
+              <section className="search-list">
+                { isSearchLoading && (<Loading />)}
+                { products?.length === 0 && (
+                  <div className="empty-container">
+                    <img className="shop" src={EmptyBox}></img>
+                    <h2 className="text">No results was found...</h2>
+                  </div>
+                )}
+                { products?.map((product) => (
+                  <Product
+                    id={product.id}
+                    title={product.name} 
+                    description={product.description} 
+                    price={product.price}
+                    shippingCost={product.shipping_cost}
+                    to={`/product-detail/${product.id}`}
+                  ></Product>
+                ))}
+              </section>
+              <section className="filters-container">
+                <SearchFilters filters={filters} categories={categories} handleClick={search}/>
+              </section>
             </section>
-            <section className="filters-container">
-              <SearchFilters filters={filters} categories={categories} handleClick={search}/>
-            </section>
-          </section>
           </section>
         </>
       )} 
