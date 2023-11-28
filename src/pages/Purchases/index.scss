@@ -1,7 +1,6 @@
 @import '../../variables.scss';
 
 .purchases {
-  height: 100vh;
   text-align: center;
   width: -webkit-fill-available;
   position: relative;
@@ -13,8 +12,9 @@
   padding: 32px;
   border-radius: 10px;
   align-items: start;
+  gap: 32px;
   
-  .container {
+  .purchases-list {
     background-color: $background-accent;
     border-radius: 10px;
     display: flex;
@@ -31,6 +31,37 @@
     }
   
 
+  }
+
+  .purchases-empty-state {
+    background-color: $background-accent;
+    display: flex;
+    //flex-direction: column;
+    text-align: left;
+    padding: 32px;
+    border-radius: 10px;
+    gap: 32px;
+
+    .svg-description {
+      .account-svg {
+        width: 64px;
+      }
+    }
+
+    .empty-description {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .paragraph {
+        font-size: 14px;
+        color: $color-paragraph;
+  
+        a {
+          color: $color-paragraph;
+        }
+      }
+    }
   }
 }
 
