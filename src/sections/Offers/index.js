@@ -3,9 +3,9 @@ import "./index.scss";
 
 import Title from '../../components/Title';
 import Product from '../../components/Product';
-import offers from '../../assets/data/offers.json';
+import Offerss from '../../assets/data/offers.json';
 
-export default function Offers({reference}) {
+export default function Offers({reference, offers}) {
   return (
     <section className="offers" ref={reference}>
       <Title text="Offers" />
