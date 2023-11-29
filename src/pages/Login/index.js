@@ -7,9 +7,11 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 import { useAuth } from "../../providers/authProvider";
+import { useCart } from "../../providers/cartProvider";
 
 export default function Login({reference}) {
   const { setToken, setAccount } = useAuth();
+  const { fetchCurrentCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -45,6 +47,7 @@ export default function Login({reference}) {
       setToken(token);
 
       if (token && account) {
+        await fetchCurrentCart(account.id);
         navigate('/');
 
         return;

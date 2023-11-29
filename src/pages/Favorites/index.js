@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./index.scss";
 
@@ -6,14 +7,14 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 import ProductPreview from '../../components/ProductPreview';
+import AccountSvg from '../../assets/account.svg';
 
 export default function Favorites({reference}) {
   const [isLoading, setIsLoading] = useState(true);
-  const [cartProducts, setCartProducts] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const cartProducts = JSON.parse(localStorage.getItem('products-cart'));
-    setCartProducts(cartProducts);
+    setFavorites([]);
     setIsLoading(false);
   }, []);
 
@@ -27,14 +28,21 @@ export default function Favorites({reference}) {
               <Loading />
             </div>
           )}
-          { cartProducts.length === 0 && (
-            <span>No hay productos.</span>
+          { favorites.length === 0 && (
+            <section className="account-empty-wrapper">
+              <div className="svg-description">
+                <img className="account-svg" src={AccountSvg}></img>
+              </div>
+              <div className="empty-description">
+                <span className="paragraph">Here you can see your favorites list.</span>
+                <span className="paragraph"><Link to='/login'>Sign in</Link> to view your favorites.</span>
+              </div>
+            </section>
           )}
-          { cartProducts.map((product) => (
+          { favorites.map((product) => (
             <ProductPreview id={product.id} title={product.title} description={product.description} price={product.price} count={product.count}></ProductPreview>
           ))}
         </div>
-
       </section>
     </section>
   );

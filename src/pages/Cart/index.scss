@@ -8,7 +8,7 @@
   margin-top: $space-32;
   display: flex;
   flex-direction: column;
-  background-color: $background-accent;
+  background-color: $background;
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
@@ -19,7 +19,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    //height: 100vh;
   }
 
   .cart-container {
@@ -33,6 +32,38 @@
 
     .products-content {
       width: -webkit-fill-available;
+
+      .cart-empty-wrapper {
+        background-color: $background-menu;
+        display: flex;
+        //flex-direction: column;
+        text-align: left;
+        padding: 32px;
+        border-radius: 10px;
+        gap: 32px;
+    
+        .svg-description {
+          .cart-svg {
+            width: 64px;
+          }
+        }
+    
+        .empty-description {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+    
+          .paragraph {
+            font-size: 14px;
+            color: $color-paragraph;
+      
+            a {
+              color: $color-paragraph;
+            }
+          }
+        }
+      }
+
 
       .products-container {
         //background-color: $background-accent;

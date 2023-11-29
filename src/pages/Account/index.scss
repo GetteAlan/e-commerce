@@ -7,7 +7,7 @@
   margin-top: $space-32;
   display: flex;
   flex-direction: column;
-  background-color: $background-accent;
+  background-color: $background;
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
@@ -15,8 +15,9 @@
   gap: 32px;
 
   .account-empty-wrapper {
-    background-color: $background-accent;
+    background-color: $background-menu;
     display: flex;
+    width: -webkit-fill-available;
     //flex-direction: column;
     text-align: left;
     padding: 32px;
@@ -46,7 +47,7 @@
   }
   
   .account-wrapper {
-    background-color: $background-accent;
+    background-color: $background-menu;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

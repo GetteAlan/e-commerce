@@ -8,25 +8,31 @@ import MenuMobile from '../../assets/menu-mobile.svg';
 import SearchBar from "../SearchBar";
 import MenuButton from "../MenuButton";
 import { useAuth } from "../../providers/authProvider";
+import { useCart } from "../../providers/cartProvider";
 
 export default function Menu({ options }) {
   const [cartCounter, setCartCounter] = useState(0);
   const [isLogged, setIsLogged] = useState(false);
   const { account, token, setToken, setAccount } = useAuth();
+  const { cart, setCart } = useCart();
 
   const handlingClickLogout = () => {
     setToken(null);
     setAccount(null);
+    setCart([])
   };
 
   useEffect(() => {
-    const cartProducts = JSON.parse(localStorage.getItem('products-cart'));
-    setCartCounter(cartProducts.length);
+    setCartCounter(cart.length);
   }, []);
 
   useEffect(() => {
     setIsLogged(account && token);
   }, [account, token]);
+
+  useEffect(() => {
+    setCartCounter(cart.length);
+  }, [cart]);
 
   const logoutOption = <MenuButton text="Logout" to="/" handlingClick={handlingClickLogout}></MenuButton>;
   const loginOption = <MenuButton text="Login" to="login"></MenuButton>;

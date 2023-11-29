@@ -2,7 +2,7 @@
 @import '../../variables.scss';
 
 .menu-container {
-    background-color: rgba($background, 0.4);
+    background-color: $background-menu;
     backdrop-filter: blur(20px);
     position: sticky;
     top: 0;

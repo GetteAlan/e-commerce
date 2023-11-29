@@ -5,8 +5,11 @@ import Button from '../Button';
 import Tag from "../Tag";
 import Card from '../Card';
 import Toast from "../Toast";
+import Loading from "../Loading";
 import "./index.scss";
 import Cart from '../../assets/cart.svg';
+import { useAuth } from "../../providers/authProvider";
+import { useCart } from "../../providers/cartProvider";
 
 export default function Product({
   id,
@@ -15,33 +18,49 @@ export default function Product({
   price,
   shippingCost,
   productImage,
-  to }) {
+  to,
+  idAccount,
+}) {
+  const { account, token } = useAuth();
+  const { fetchCurrentCart } = useCart();
+  const [isLoading, setIsLoading] = useState(false);
   const [idProduct, setIdProduct] = useState(id);
   const freeTagColor = '#e6f7ee';
   const freeTagBorderColor = '#1c6415';
   const freeTagTextColor = '#00a650';
   const freeShippingTag = <Tag color={freeTagColor} borderColor={freeTagBorderColor} textColor={freeTagTextColor}>Free</Tag>;
 
-  const handleClick = () => {
-    let cartProducts = JSON.parse(localStorage.getItem('products-cart'));
-    const product = {
-      id: idProduct,
-      title,
-      description,
-      price,
-      count: 1,
-    };
-
-    if (!cartProducts || !Array.isArray(cartProducts)) {
-      cartProducts = [];
+  const addCartHandling = () => {
+    if (account && token) {
+      setIsLoading(true);
+      const endpoint = `https://e-commerce.gettealan.com/api/v1/cart/${idAccount}`;
+  
+      fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          idProduct,
+          quantity: 1,
+        })
+      })
+      .then((response) => {
+        response.json().then(async(result) => {
+          console.log(result);
+          await fetchCurrentCart(account.id);
+          setIsLoading(false);
+          var x = document.getElementById("snackbar");
+          x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        });
+      }).catch((error) => {
+        console.log('Error', error);
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+      });
     }
-
-    cartProducts.push(product);
-    localStorage.setItem('products-cart', JSON.stringify(cartProducts));
-
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   };
 
   return (
@@ -63,9 +82,15 @@ export default function Product({
             <span class="shipping">Shipping {shippingCost > 0.00 ? `US$ ${shippingCost}` : freeShippingTag}</span>
           </div>          
           <div className="button-container">
-            <Link className="cart-link" onClick={handleClick}>
-              <img className="cart-svg" src={Cart}></img>
-            </Link>   
+            { isLoading ? (
+              <div className="loading-wrapper">
+                <Loading />
+              </div>
+            ) : (
+              <Link className="cart-link" onClick={addCartHandling}>
+                <img className="cart-svg" src={Cart}></img>
+              </Link>   
+            )}        
           </div>
         </div>
       </Card>

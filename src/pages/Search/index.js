@@ -68,6 +68,7 @@ export default function Search({reference}) {
 
   useEffect(() => {
     const category = searchParams.get("category");
+    const searchQuery = searchParams.get("search");
 
     fetch('https://e-commerce.gettealan.com/api/v1/categories')
       .then((response) => {
@@ -126,6 +127,7 @@ export default function Search({reference}) {
                     price={product.price}
                     shippingCost={product.shipping_cost}
                     to={`/product-detail/${product.id}`}
+                    idAccount={1}
                   ></Product>
                 ))}
               </section>

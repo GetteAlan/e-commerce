@@ -20,7 +20,7 @@
   margin-top: $space-32;
   display: flex;
   flex-direction: column;
-  background-color: $background-accent;
+  background-color: $background;
   margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
@@ -31,15 +31,13 @@
     display: flex;
     justify-content: space-between;
     width: -webkit-fill-available;
+    gap: 32px;
 
     .search-list {
-      //background-color: $background-accent;
       border-radius: 10px;
       display: flex;
-      //justify-content: center;
       flex-flow: row;
       flex-wrap: wrap;
-      //margin: $space-32 $space-main-margin-desktop;
       height: auto;
       width: -webkit-fill-available;
       gap: 16px;
@@ -49,10 +47,12 @@
         justify-content: center;
         align-items: center;
         width: -webkit-fill-available;
-        height: -webkit-fill-available;
         gap: 32px;
-        margin: 32px;
-  
+        background-color: $background-menu;
+        border-radius: 10px;
+        height: fit-content;
+        padding: 32px;
+
         .shop {
           width: 64px;
           filter: invert(97%) sepia(6%) saturate(185%) hue-rotate(138deg) brightness(97%) contrast(96%);
@@ -89,7 +89,7 @@
         --main-color: #323232;
         --main-focus: #2d8cf0;
         //width: fit-content;
-        background: $background;
+        background: $background-menu;
         border: 2px solid var(--main-color);
         box-shadow: 4px 4px var(--main-color);
         border-radius: 5px;
