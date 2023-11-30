@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./index.scss";
 
 import Title from '../../components/Title';
 import Product from '../../components/Product';
-import Offerss from '../../assets/data/offers.json';
+import Loading from '../../components/Loading';
+import { getOffers } from '../../services/offers';
 
-export default function Offers({reference, offers}) {
+export default function Offers({reference}) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [offers, setOffers] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    (async() => {
+      setOffers(await getOffers());
+      setIsLoading(false);
+  })();
+  }, []);
+
   return (
     <section className="offers" ref={reference}>
       <Title text="Offers" />
-      <section className="offers-list">
+      { isLoading && (
+        <div className="loading-wrapper">
+          <Loading />
+        </div>
+      )}
+      { offers && (
+        <section className="offers-list">
         { offers.map((offer) => (
           <Product
             id={offer.id}
@@ -18,8 +36,10 @@ export default function Offers({reference, offers}) {
             price={offer.price}
             to={offer.to}
           ></Product>
-        ))}
-      </section>
+          ))}
+        </section>
+      )}
+
     </section>
   );
 }

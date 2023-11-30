@@ -9,6 +9,7 @@ import InputText from "../../components/InputText";
 import Title from '../../components/Title';
 import Product from '../../components/Product';
 import Loading from '../../components/Loading';
+import Pagination from '../../components/Pagination';
 import EmptyBox from '../../assets/empty-box.svg';
 
 export default function Search({reference}) {
@@ -103,17 +104,17 @@ export default function Search({reference}) {
             <Loading />
           </div>          
         </section> ) : (
-        <>
-          <section className="search" ref={reference}>
-            <Title text="Search" />
-            <section className="search-container">
+        <section className="search" ref={reference}>
+          <Title text="Search" />
+          <section className="search-container">
+            <section className="search-list-wrapper">
               <section className="search-list">
                 { isSearchLoading && (
                   <div className="loading-container">
                     <Loading />
                   </div>                
                 )}
-                { products?.length === 0 && (
+                { !isSearchLoading && products?.length === 0 && (
                   <div className="empty-container">
                     <img className="shop" src={EmptyBox}></img>
                     <h2 className="text">No results was found...</h2>
@@ -127,50 +128,55 @@ export default function Search({reference}) {
                     price={product.price}
                     shippingCost={product.shipping_cost}
                     to={`/product-detail/${product.id}`}
-                    idAccount={1}
+                    idAccount={1} // TODO: remove this harcode
                   ></Product>
-                ))}
+                ))}                                
               </section>
-              <section className="filters-container">
-                <section className="search-filters">
-                  <div className="header">
-                    <h2 className="subtitle">Filters</h2>
-                  </div>
-                  <div className="content">
-                    <div className="section-filters">
-                      <h2 className="subtitle">Condition</h2>
-                      <div className="condition-container">
-                        <Checkbox text="New"></Checkbox>
-                        <Checkbox text="Used"></Checkbox>
-                      </div>
+              { !isSearchLoading && products?.length > 0 && (
+                <section className="pagination-wrapper">
+                  <Pagination pages={7} />
+                </section>
+              )}
+            </section>            
+            <section className="filters-container">
+              <section className="search-filters">
+                <div className="header">
+                  <h2 className="subtitle">Filters</h2>
+                </div>
+                <div className="content">
+                  <div className="section-filters">
+                    <h2 className="subtitle">Condition</h2>
+                    <div className="condition-container">
+                      <Checkbox text="New"></Checkbox>
+                      <Checkbox text="Used"></Checkbox>
                     </div>
+                  </div>
 
-                    <div className="section-filters">
-                      <h2 className="subtitle">Price</h2>
-                      <div className="price-container">
-                        <InputText placeholder="Min" onChange={e => setPriceFrom(e.target.value)}/>
-                        <span className="paragraph">-</span>
-                        <InputText placeholder="Max" onChange={e => setPriceTo(e.target.value)}/>
-                      </div>
+                  <div className="section-filters">
+                    <h2 className="subtitle">Price</h2>
+                    <div className="price-container">
+                      <InputText placeholder="Min" onChange={e => setPriceFrom(e.target.value)}/>
+                      <span className="paragraph">-</span>
+                      <InputText placeholder="Max" onChange={e => setPriceTo(e.target.value)}/>
                     </div>
+                  </div>
 
-                    <div className="section-filters">
-                      <h2 className="subtitle">Categories</h2>
-                      <div className="categories-container">
-                        { categories.map((category) => (
-                          <Checkbox id={category.id} text={category.name} handleClick={(e) => handleClickCategory(e, category.name)} checked={category.checked}></Checkbox>
-                        ))}
-                      </div>
+                  <div className="section-filters">
+                    <h2 className="subtitle">Categories</h2>
+                    <div className="categories-container">
+                      { categories.map((category) => (
+                        <Checkbox id={category.id} text={category.name} handleClick={(e) => handleClickCategory(e, category.name)} checked={category.checked}></Checkbox>
+                      ))}
                     </div>
                   </div>
-                  <div className="footer">
-                    <Button text="Search" handleClick={search}></Button>     
-                  </div>
-                </section>   
-              </section>
+                </div>
+                <div className="footer">
+                  <Button text="Search" handleClick={search}></Button>     
+                </div>
+              </section>   
             </section>
           </section>
-        </>
+        </section>       
       )} 
     </>
   );

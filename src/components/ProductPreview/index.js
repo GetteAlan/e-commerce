@@ -7,14 +7,14 @@ import "./index.scss";
 
 export default function ProductPreview({
   id,
-  title, 
+  name, 
   description, 
   price,
-  image,
-  count,
+  initialQuantity,
   to }) {
   const [idProduct, setIdProduct] = useState(id);
-
+  const [quantity, setQuantity] = useState(initialQuantity);
+  
   const handleClick = () => {
     let cartProducts = JSON.parse(localStorage.getItem('products-cart'));
   
@@ -24,25 +24,41 @@ export default function ProductPreview({
       cartProducts = [idProduct];
     }
 
-    localStorage.setItem('products-cart', JSON.stringify(cartProducts));
+    // localStorage.setItem('products-cart', JSON.stringify(cartProducts));
+  };
+
+  const handleDecrease = (quantity) => {
+    
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }    
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
   };
 
   return (
     <Card to={to}>
       <div className="product-preview">
-        <div className="card-img"><div className="img"></div></div>
+        <div className="product-image-container">
+          <img class="product-image" src={`images/products/${id}-thumbnail.webp`} alt={name}></img>
+        </div>
         <div className="card-description">
-          <div className="card-title">{title}</div>
+          <div className="card-title">{name}</div>
           <div className="card-subtitle">{description}</div>
         </div>
         <div className="card-options">
           <div className="options-container">
             {/* <Button text="Buy" handleClick={handleClick}></Button> */}
-            <IncreaseDecreaseInput value={count}></IncreaseDecreaseInput>
+            <IncreaseDecreaseInput quantity={quantity} handleDecrease={() => handleDecrease(quantity)} handleIncrease={() => handleIncrease(quantity)}></IncreaseDecreaseInput>
           </div>
         </div>
         <div className="card-summary">
-          <div className="card-price">{price}</div>
+          <div className="card-price">{`US$ ${price}`}</div>
+          { quantity > 1 && (
+            <div className="card-price">{`x${quantity}`}</div>
+          )}
         </div>
       </div>
     </Card>    

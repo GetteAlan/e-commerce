@@ -5,6 +5,8 @@ form {
   //margin: 0 auto;
   text-align: center;
   //padding-top: 50px;
+
+
 }
 
 .value-button {
@@ -14,6 +16,7 @@ form {
   width: 40px;
   height: 20px;
   text-align: center;
+  font-weight: 600;
   vertical-align: middle;
   padding: 11px 0;
   background: #eee;
@@ -23,7 +26,8 @@ form {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
+  
+  }
 
 .value-button:hover {
   cursor: pointer;

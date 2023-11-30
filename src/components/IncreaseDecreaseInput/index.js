@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./index.scss";
 
-export default function IncreaseDecreaseInput({value, handleClick, width, height, hierarchy='primary'}) {
+export default function IncreaseDecreaseInput({quantity, handleDecrease, handleIncrease}) {
+
   return (
     <form>
-      <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-      <input type="number" id="number" value={value} />
-      <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+      <div className="value-button" id="decrease" onClick={handleDecrease} value="Decrease Value">-</div>
+      <input type="number" id="number" value={quantity} />
+      <div className="value-button" id="increase" onClick={handleIncrease} value="Increase Value">+</div>
     </form>
   );
 }

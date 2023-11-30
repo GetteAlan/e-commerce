@@ -15,10 +15,12 @@
   align-items: start;
   gap: 32px;
 
-  .loading-container {
+  .loading-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 64px;
+    height: 64px;
+    align-self: center;
   }
 
   .cart-container {
@@ -32,6 +34,9 @@
 
     .products-content {
       width: -webkit-fill-available;
+      display: flex;
+    justify-content: center;
+    align-items: center;
 
       .cart-empty-wrapper {
         background-color: $background-menu;

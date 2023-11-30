@@ -8,6 +8,7 @@
   justify-content: center;
 
   .search-wrapper {
+    display: flex;
     width: 64px;
     height: 64px;
   }
@@ -33,51 +34,60 @@
     width: -webkit-fill-available;
     gap: 32px;
 
-    .search-list {
-      border-radius: 10px;
-      display: flex;
-      flex-flow: row;
-      flex-wrap: wrap;
-      height: auto;
+    .search-list-wrapper {
       width: -webkit-fill-available;
       gap: 16px;
-  
-      .empty-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: -webkit-fill-available;
-        gap: 32px;
-        background-color: $background-menu;
+      display: flex;
+      flex-direction: column;
+
+      .search-list {
         border-radius: 10px;
-        height: fit-content;
-        padding: 32px;
-
-        .shop {
-          width: 64px;
-          filter: invert(97%) sepia(6%) saturate(185%) hue-rotate(138deg) brightness(97%) contrast(96%);
-        }
-    
-        .text {
-          font-size: 24px;
-          font-weight: 400;
-          color: $color-paragraph;
-        }
-      }
-
-      .loading-container {
-        width: -webkit-fill-available;
-        height: -webkit-fill-available;
         display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .loader {
-          width: 64px;
-          height: 64px;
+        flex-flow: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: -webkit-fill-available;
+        gap: 16px;
+    
+        .empty-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: -webkit-fill-available;
+          gap: 32px;
+          background-color: $background-menu;
+          border-radius: 10px;
+          height: fit-content;
+          padding: 32px;
+  
+          .shop {
+            width: 64px;
+            filter: invert(97%) sepia(6%) saturate(185%) hue-rotate(138deg) brightness(97%) contrast(96%);
+          }
+      
+          .text {
+            font-size: 24px;
+            font-weight: 400;
+            color: $color-paragraph;
+          }
+        }
+  
+        .loading-container {
+          width: -webkit-fill-available;
+          height: -webkit-fill-available;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          .loader {
+            width: 64px;
+            height: 64px;
+          }
         }
       }
     }
+
+
   
     .filters-container {
       width: 35%;

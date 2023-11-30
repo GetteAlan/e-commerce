@@ -20,14 +20,14 @@
   }
 
   .category {
-    width: 128px;
-    height: 128px;
+    width: 100px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .text {
-      color: $color-title-h2;
+      color: $color-paragraph;
       font-weight: 600;
     }
 

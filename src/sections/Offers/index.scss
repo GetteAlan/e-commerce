@@ -12,6 +12,13 @@
   border-radius: 10px;
   align-items: start;
   
+  .loading-wrapper {
+    display: flex;
+    align-self: center;
+    width: 64px;
+    height: 64px;
+  }
+
   .offers-list {
     display: flex;
     flex-flow: wrap;
