@@ -3,15 +3,22 @@ import PropTypes from "prop-types";
 import Button from "../Button";
 import "./index.scss";
 
-export default function Pagination({handleClick, pages}) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function Pagination({handleChangePage, totalPages, currentPage, setCurrentPage}) {
 
   const previewPage = () => {
-    console.log('previewPage');
+    if (currentPage > 1) {
+      const newCurrentPage = currentPage - 1;
+      setCurrentPage(newCurrentPage);
+      handleChangePage(newCurrentPage);
+    }
   };
 
   const nextPage = () => {
-    console.log('nextPage');
+    if (currentPage < totalPages) {
+      const newCurrentPage = currentPage + 1;
+      setCurrentPage(newCurrentPage);
+      handleChangePage(newCurrentPage);
+    }
   };
 
   return (
@@ -21,12 +28,12 @@ export default function Pagination({handleClick, pages}) {
 
       </div>
       <div className="pages-wrapper">
-        <button className="page-option">{currentPage}</button>
-        <span className="pages-of">de {pages}</span>
+        <div className="current-page">{currentPage}</div>
+        <span className="pages-of">de {totalPages}</span>
         
       </div>
       <div className="">
-        <button className="page-option" onClick={nextPage} disabled>{">"}</button>
+        <button className="page-option" onClick={nextPage}>{">"}</button>
       </div>
     </section>
   );

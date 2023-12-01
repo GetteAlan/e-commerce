@@ -13,7 +13,8 @@ export default function Offers({reference}) {
   useEffect(() => {
     setIsLoading(true);
     (async() => {
-      setOffers(await getOffers());
+      const response = await getOffers();
+      setOffers(response.products);
       setIsLoading(false);
   })();
   }, []);

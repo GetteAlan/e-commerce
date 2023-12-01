@@ -1,0 +1,131 @@
+@import '../../variables.scss';
+
+.payment {
+  //height: 100vh;
+  text-align: center;
+  width: -webkit-fill-available;
+  position: relative;
+  margin-top: $space-32;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+  margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
+  padding: 32px;
+  border-radius: 10px;
+  align-items: start;
+  gap: 32px;
+
+  .subtitle {
+    font-size: 18px;
+    font-weight: 800;
+    color: $color-paragraph;
+    margin: 0;
+  }
+
+  .loading-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    align-self: center;
+  }
+
+  .payment-container {
+    width: -webkit-fill-available;
+    //background-color: $background-accent;
+    border-radius: 10px;
+    display: flex;
+    height: -webkit-fill-available;
+    gap: 32px;
+    
+    .step-option {
+      width: 100px;
+      height: 100px;
+      background: $background-accent;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .steps-wrapper {
+      width: -webkit-fill-available;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: flex-start;
+
+      .step {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+
+    .products-content {
+      width: -webkit-fill-available;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .cart-empty-wrapper {
+        background-color: $background-menu;
+        display: flex;
+        //flex-direction: column;
+        text-align: left;
+        padding: 32px;
+        border-radius: 10px;
+        gap: 32px;
+    
+        .svg-description {
+          .cart-svg {
+            width: 64px;
+          }
+        }
+    
+        .empty-description {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+    
+          .paragraph {
+            font-size: 14px;
+            color: $color-paragraph;
+      
+            a {
+              color: $color-paragraph;
+            }
+          }
+        }
+      }
+
+
+      .products-container {
+        //background-color: $background-accent;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        //padding: 16px;
+        width: -webkit-fill-available;
+        //overflow-y: scroll;
+        // height: -webkit-fill-available;
+      }
+    }
+
+    .summary-content {
+      width: 40%;
+    }
+  }
+}
+
+@media (max-width: 580px) {
+  .payment {
+    margin-top: $space-main-margin-mobile;
+
+
+    .container {
+      margin: $space-16 $space-main-margin-mobile;
+
+  
+    }
+  }
+}

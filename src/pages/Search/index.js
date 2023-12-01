@@ -12,6 +12,8 @@ import Loading from '../../components/Loading';
 import Pagination from '../../components/Pagination';
 import EmptyBox from '../../assets/empty-box.svg';
 
+import { getProducts } from '../../services/products';
+
 export default function Search({reference}) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
@@ -21,28 +23,26 @@ export default function Search({reference}) {
   const [categories, setCategories] = useState([]);
   const [priceFrom, setPriceFrom] = useState();
   const [priceTo, setPriceTo] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(5);
 
   const search = async () => {
     setProducts(null);
     setIsSearchLoading(true);
+    setCurrentPage(1);
 
     const categoriesList = categories.filter((category => category.checked && category.id !== 0))
       .map((category => category.id))
       .join('|');
-    let categoriesQuery = '';
-    
-    if (categoriesList && categoriesList !== '') {
-      categoriesQuery = `categories=${categoriesList}`;
+
+    const response = await getProducts(currentPage, limit, categoriesList, priceFrom, priceTo);
+
+    if (!response.error) {
+      setTotalPages(Math.ceil(response.totalProducts / limit));
+      setProducts(response.products);
     }
 
-    // price query
-    const priceFromQuery = priceFrom ? `&priceFrom=${priceFrom}` : '';
-    const priceToQuery = priceTo ? `&priceTo=${priceTo}` : '';
-
-    const response = await fetch(`https://e-commerce.gettealan.com/api/v1/products?${categoriesQuery}${priceFromQuery}${priceToQuery}`);
-    const products = await response.json();
-
-    setProducts(products);
     setIsSearchLoading(false);
   }
 
@@ -96,6 +96,16 @@ export default function Search({reference}) {
     });
   }, []);
 
+  const handleChangePage = async (page) => {
+    setProducts([]);
+    setIsSearchLoading(true);
+
+    const response = await getProducts(page, limit);
+
+    setProducts(response.products);
+    setIsSearchLoading(false);
+  };
+
   return (
     <>
       { isLoading ? (
@@ -134,7 +144,7 @@ export default function Search({reference}) {
               </section>
               { !isSearchLoading && products?.length > 0 && (
                 <section className="pagination-wrapper">
-                  <Pagination pages={7} />
+                  <Pagination totalPages={totalPages} handleChangePage={handleChangePage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 </section>
               )}
             </section>            

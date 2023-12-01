@@ -46,6 +46,13 @@
     }
   }
   
+  .subtitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: $color-paragraph;
+    margin: 0 0 8px 0;
+  }
+
   .account-wrapper {
     background-color: $background-menu;
     border-radius: 10px;
@@ -55,7 +62,85 @@
     height: -webkit-fill-available;
     width: -webkit-fill-available;
     padding: 32px;
-    gap: 16px;
+    gap: 32px;
+
+    .account-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .personal-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .account-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .cards-wrapper {
+        gap: 16px;
+        display: flex;
+        flex-direction: column;
+
+        .loading-wrapper {
+          display: flex;
+          width: 32px;
+          height: 32px;
+        }
+
+        .card {
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          background-color: $background-accent;
+          padding: 16px;
+          border-radius: 8px;
+
+          .card-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .card-image-wrapper {
+              .card-image {
+                width: 32px;
+                height: 32px;
+              }
+            }
+
+            .card-info {
+              display: flex;
+              flex-direction: column;
+              width: -webkit-fill-available;
+
+              .main-paragraph {
+                font-size: 14px;
+                font-weight: 600;
+                color: $color-paragraph;
+              }
+
+              .paragraph {
+                font-size: 14px;
+                color: $color-paragraph;
+              }
+            }
+
+            .button-wrapper {
+              width: fit-content;
+
+              button {
+                width: 80px;
+                height: 36px;
+              }
+            }
+          }
+        }
+      }
+    }
 
     .key-value-wrapper {
       display: flex;
@@ -63,9 +148,10 @@
       align-items: center;
       gap: 6px;
 
-      .subtitle {
+      .paragraph-key {
         font-size: 16px;
-        color: $color-title-h2;
+        font-weight: 600;
+        color: $color-paragraph;
         margin: 0;
         width: 105px;
         text-align: end;

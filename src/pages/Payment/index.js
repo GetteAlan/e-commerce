@@ -14,7 +14,7 @@ import { useCart } from "../../providers/cartProvider";
 
 import { getProductsById } from '../../services/products';
 
-export default function Cart({reference}) {
+export default function Payment({reference}) {
   const { token, account } = useAuth();
   const { cart, fetchCurrentCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
@@ -42,37 +42,33 @@ export default function Cart({reference}) {
   }
 
   return (
-    <section className="cart" ref={reference}>
-      <Title text="Cart"/>
-      <section className="cart-container">
-        <section className="products-content">
-          <div className="products-container">
-            { isLoading && (
-              <div className="loading-wrapper">
-                <Loading />
-              </div>
-            )}
-            { !isLoading && cartProducts?.length === 0 && (
-              <section className="cart-empty-wrapper">
-              <div className="svg-description">
-                <img className="cart-svg" src={CartEmpty}></img>
-              </div>
-              <div className="empty-description">
-                <span className="paragraph">Here you can see your cart list.</span>
-                <span className="paragraph"><Link to='/login'>Sign in</Link> to view your cart.</span>
-              </div>
-            </section>
-            )}
-            { cartProducts?.map((product) => (
-              <ProductPreview 
-                id={product.id} 
-                name={product.name} 
-                price={product.price} 
-                initialQuantity={getQuantity(product)}
-              ></ProductPreview>
-            ))}
-          </div>
+    <section className="payment" ref={reference}>
+      <Title text="Payment"/>
+      <section className="payment-container">
+        <section className="steps-wrapper">
+          <section className="step">
+            <h2 className="subtitle">Choose the delivery method for your products</h2>
+            <div className="step-option">Domicilio</div>
+            <div className="step-option">Retirar</div>
+          </section>
+
+          <section className="step">
+            <h2 className="subtitle">Choose your payment method</h2>
+            <div className="step-option">Domicilio</div>
+            <div className="step-option">Retirar</div>
+          </section>
+        
         </section>
+        
+
+
+        { isLoading && (
+          <div className="loading-wrapper">
+            <Loading />
+          </div>
+        )}
+        
+
         { !isLoading && cartProducts.length > 0 && (
           <section className="summary-content">
             <PurchaseSummary products={cartProducts} />

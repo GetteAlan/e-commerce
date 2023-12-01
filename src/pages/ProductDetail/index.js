@@ -27,7 +27,6 @@ export default function ProductDetail({reference}) {
       response.json().then((result) => {
         const product = result[0];
         //const shippingCost = product.shipping_cost ? `US$ ${product.shipping_cost}` : 'FREE';
-console.log('', product.shipping_cost);
 /*         const productTransformed = {
           ...product,
           price: `US$ ${product.price}`,

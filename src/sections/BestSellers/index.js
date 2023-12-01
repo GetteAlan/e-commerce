@@ -15,7 +15,8 @@ export default function BestSellers({reference}) {
     setIsLoading(true);
 
     (async() => {
-      setBestSellers(await getBestSellers());
+      const response = await getBestSellers();
+      setBestSellers(response.products);
       setIsLoading(false);
     })();
   }, []);
