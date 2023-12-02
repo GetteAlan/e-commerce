@@ -12,7 +12,7 @@ $border-color: $background-menu;
 }
 
 legend {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 600;
 	color: $color-paragraph;
 	margin: 0;
@@ -31,7 +31,7 @@ legend {
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	flex: 1;
+	// flex: 1;
 	box-sizing: border-box;
 	display: flex;
 	padding: 10px 10px 10px 32px;
