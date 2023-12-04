@@ -7,7 +7,6 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import RadioButton from '../../components/RadioButton';
 import Loading from '../../components/Loading';
-import ProductPreview from '../../components/ProductPreview';
 import PurchaseSummary from '../../components/PurchaseSummary';
 import CartEmpty from '../../assets/cart-empty.svg';
 import Shop from '../../assets/shop.svg';
@@ -18,6 +17,7 @@ import { useCart } from "../../providers/cartProvider";
 
 import { getProductsById } from '../../services/products';
 import { getCards } from '../../services/cards';
+import { confirmPurchase } from '../../services/purchases';
 
 export default function Payment({reference}) {
   const { token, account } = useAuth();
@@ -35,11 +35,9 @@ export default function Payment({reference}) {
       (async() => {
         const response = await getProductsById(idProducts);
         const cardsResponse = await getCards(account.id);
-        console.log('cardsResponse', cardsResponse);
+
         setCards(cardsResponse);
         setCartProducts(response.products);
-      
-
         setIsLoading(false);
       })();
     }
@@ -50,6 +48,14 @@ export default function Payment({reference}) {
 
     return cartFiltered.quantity;
   }
+
+  const handleConfirmPurchase = async () => {
+    setIsLoading(true);
+    const response = await confirmPurchase(account.id);
+    console.log('response', response);
+
+    setIsLoading(false);
+  };
 
   return (
     <section className="payment" ref={reference}>
@@ -88,7 +94,7 @@ export default function Payment({reference}) {
 
         { !isLoading && cartProducts.length > 0 && (
           <section className="summary-content">
-            <PurchaseSummary products={cartProducts} />
+            <PurchaseSummary products={cartProducts} handleClick={handleConfirmPurchase} />
           </section>
         )}
       </section>

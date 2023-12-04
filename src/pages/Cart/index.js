@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./index.scss";
@@ -15,6 +16,7 @@ import { useCart } from "../../providers/cartProvider";
 import { getProductsById } from '../../services/products';
 
 export default function Cart({reference}) {
+  const navigate = useNavigate();
   const { token, account } = useAuth();
   const { cart, fetchCurrentCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
@@ -23,22 +25,30 @@ export default function Cart({reference}) {
   useEffect(() => {
     if (account && token) { 
       setIsLoading(true);
-      const idProducts = cart?.map(product => product.idProduct);
+      const idProducts = cart?.map(product => product.idProduct); // cart have: id, idProduct, quantity, idAccount
     
       // fetching the products
-      (async() => {
+      (async () => {
         const response = await getProductsById(idProducts);
-  
-        setCartProducts(response.products);
+        const cartProducts = response.products.map((product) => {
+          const quantity = cart.filter(item => item.idProduct === product.id)[0].quantity;
+   
+          return {
+            ...product,
+            quantity,
+            totalPrice: '',
+            shipping: '',
+          };
+        });
+
+        setCartProducts(cartProducts);
         setIsLoading(false);
       })();
     }
   }, [cart, account, token]);
 
-  const getQuantity = (product) => {
-    const cartFiltered = cart.filter(item => item.idProduct === product.id)[0];
-
-    return cartFiltered.quantity;
+  const handleClick = () => {
+    navigate('/payment');
   }
 
   return (
@@ -68,14 +78,14 @@ export default function Cart({reference}) {
                 id={product.id} 
                 name={product.name} 
                 price={product.price} 
-                initialQuantity={getQuantity(product)}
+                initialQuantity={product.quantity}
               ></ProductPreview>
             ))}
           </div>
         </section>
         { !isLoading && cartProducts.length > 0 && (
           <section className="summary-content">
-            <PurchaseSummary products={cartProducts} />
+            <PurchaseSummary products={cartProducts} handleClick={handleClick} />
           </section>
         )}
       </section>

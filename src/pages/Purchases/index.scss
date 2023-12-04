@@ -13,24 +13,102 @@
   border-radius: 10px;
   align-items: start;
   gap: 32px;
+
+  .loading-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    align-self: center;
+  }
+
+  .paragraph {
+    color: $color-paragraph;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .color-green {
+    color: $color-green;
+  }
+
+  .strong-weight {
+    font-weight: 800;
+  }
+
+  .purchase-divider {
+    width: 100%;
+    border: 1px solid #323232;
+    border-radius: 50px;
+    margin: 0;
+  }
   
   .purchases-list {
-    background-color: $background-accent;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin: $space-32 $space-main-margin-desktop;
+    width: -webkit-fill-available;
     height: -webkit-fill-available;
+    gap: 16px;
 
-    .content {
+    .purchase-item {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 16px;
+      background-color: $background-menu;
+      gap: 16px;
 
-      margin: $space-32;
-  
+      .purchase-date {
+        display: flex;
+        justify-content: right;
+      }
+
+      .purchase-products-list {
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        //gap: 16px;
+
+        .product {
+          display: flex;
+          flex-direction: row;
+          padding: 0 0 16px 0;
+          //background-color: $background-accent;
+          height: auto;
+          width: -webkit-fill-available;
+          border-radius: 10px;
+
+          .product-img {
+            width: 64px;
+            height: 64px;
+            background-color: white;
+            float: left;
+            object-fit: contain;
+            display: flex;
+            align-self: center;
+          }
+
+          .product-items {
+            display: flex;
+            flex-direction: column;
+            width: -webkit-fill-available;
+
+            .product-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              width: -webkit-fill-available;
+            }
+          }
+        }
+      }
+
+      .purchase-total-wrapper {
+        display: flex;
+        justify-content: space-between;
+      }
     }
-  
-
   }
 
   .purchases-empty-state {

@@ -1,20 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Button from '../../components/Button';
 import "./index.scss";
 
-export default function PurchaseSummary({products}) {
-  const navigate = useNavigate();
+export default function PurchaseSummary({products, handleClick}) {
   const totalProducts = products?.reduce((accumulator, product) => accumulator + parseFloat(product.price), 0);
   const shipping = products?.reduce((accumulator, product) => accumulator + parseFloat(product.shipping_cost), 0);
   
   const totalAmount = 0;
-
-  const handleBuyClick = () => {
-    navigate('/payment');
-  };
 
   return (
     <section className="summary">
@@ -39,7 +33,7 @@ export default function PurchaseSummary({products}) {
         </div>
       </div>
       <div className="footer">
-        <Button text="Buy" handleClick={handleBuyClick}></Button>     
+        <Button text="Buy" handleClick={handleClick}></Button>     
       </div>
     </section>    
   );
