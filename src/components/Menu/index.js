@@ -31,7 +31,7 @@ export default function Menu({ options }) {
   }, [account, token]);
 
   useEffect(() => {
-    setCartCounter(cart.length);
+    setCartCounter(cart?.length);
   }, [cart]);
 
   const logoutOption = <MenuButton text="Logout" to="/" handlingClick={handlingClickLogout}></MenuButton>;
@@ -41,7 +41,7 @@ export default function Menu({ options }) {
     <section className="menu-container">
       <header className="menu-header">
         <div className="logo-container">
-          <img className="logo" src={Logo}></img>
+          <img className="logo" src={Logo} alt="log"></img>
           <h2 className="text">E-Commerce</h2>
         </div>
         <div className="search-container">
@@ -73,7 +73,9 @@ export default function Menu({ options }) {
           <MenuButton text="Account" to="account"></MenuButton>
           { isLogged ? (logoutOption) : (loginOption)}
           <div className="cart-link-container">
-            <span className="cart-counter">{cartCounter}</span>
+            { cartCounter > 0 && (
+              <span className="cart-counter">{cartCounter}</span>
+            )}            
             <Link className="cart-link" to="cart">
               <img className="cart-svg" src={Cart}></img>
             </Link>   

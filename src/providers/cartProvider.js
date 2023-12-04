@@ -8,7 +8,6 @@ const CartProvider = ({ children }) => {
 
   const fetchCurrentCart = useCallback(
     (idAccount) => {
-      console.log('SE LLAMA A fetchCurrentCart');
       if (idAccount) {
         const endpoint = `https://e-commerce.gettealan.com/api/v1/cart/${idAccount}`;
   

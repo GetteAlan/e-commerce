@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Button from '../../components/Button';
 import "./index.scss";
 
-export default function PurchaseSummary({products, handleClick}) {
+export default function PurchaseSummary({textButton, products, handleClick}) {
   const totalProducts = products?.reduce((accumulator, product) => accumulator + parseFloat(product.price), 0);
   const shipping = products?.reduce((accumulator, product) => accumulator + parseFloat(product.shipping_cost), 0);
   
@@ -33,7 +33,7 @@ export default function PurchaseSummary({products, handleClick}) {
         </div>
       </div>
       <div className="footer">
-        <Button text="Buy" handleClick={handleClick}></Button>     
+        <Button text={textButton} handleClick={handleClick}></Button>     
       </div>
     </section>    
   );

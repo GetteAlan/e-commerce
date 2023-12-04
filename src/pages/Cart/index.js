@@ -24,26 +24,29 @@ export default function Cart({reference}) {
 
   useEffect(() => {
     if (account && token) { 
-      setIsLoading(true);
       const idProducts = cart?.map(product => product.idProduct); // cart have: id, idProduct, quantity, idAccount
-    
-      // fetching the products
-      (async () => {
-        const response = await getProductsById(idProducts);
-        const cartProducts = response.products.map((product) => {
-          const quantity = cart.filter(item => item.idProduct === product.id)[0].quantity;
-   
-          return {
-            ...product,
-            quantity,
-            totalPrice: '',
-            shipping: '',
-          };
-        });
+      
+      if (idProducts?.length > 0) {
+        setIsLoading(true);
 
-        setCartProducts(cartProducts);
-        setIsLoading(false);
-      })();
+        // fetching the products
+        (async () => {
+          const response = await getProductsById(idProducts);
+          const cartProducts = response.products?.map((product) => {
+            const quantity = cart.filter(item => item.idProduct === product.id)[0]?.quantity;
+    
+            return {
+              ...product,
+              quantity,
+              totalPrice: '',
+              shipping: '',
+            };
+          });
+
+          setCartProducts(cartProducts);
+          setIsLoading(false);
+        })();
+      }
     }
   }, [cart, account, token]);
 
@@ -85,7 +88,7 @@ export default function Cart({reference}) {
         </section>
         { !isLoading && cartProducts.length > 0 && (
           <section className="summary-content">
-            <PurchaseSummary products={cartProducts} handleClick={handleClick} />
+            <PurchaseSummary textButton="Buy" products={cartProducts} handleClick={handleClick} />
           </section>
         )}
       </section>
