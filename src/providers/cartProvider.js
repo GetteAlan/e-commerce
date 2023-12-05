@@ -1,5 +1,7 @@
 import { createContext, useContext, useCallback, useMemo, useState } from "react";
 
+import cartService from '../services/cart';
+
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
@@ -7,23 +9,24 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const fetchCurrentCart = useCallback(
-    (idAccount) => {
+    async (idAccount) => {
       if (idAccount) {
-        const endpoint = `https://e-commerce.gettealan.com/api/v1/cart/${idAccount}`;
-  
-        fetch(endpoint)
-          .then((response) => {
-            response.json().then((result) => {
-    
-              setCart(result);
-            });
-          }).catch((error) => {
-            console.log('Error', error);
-            setCart();
-          });
+        const response = await cartService.getCurrentCart(idAccount);
+
+        if (response) {
+          setCart(response);
+        } else {
+          setCart();
+        }
       }      
-    }
-    , []);
+    }, []);
+
+  const updateProductQuantity = useCallback(
+    async (idAccount, idProduct, quantity) => {
+      if (idAccount) {
+        return await cartService.updateProductQuantity(idAccount, idProduct, quantity);
+      } 
+    }, []);
 
   // Memoized value of the authentication context
   const contextValue = useMemo(
@@ -31,8 +34,9 @@ const CartProvider = ({ children }) => {
       cart,
       setCart,
       fetchCurrentCart,
+      updateProductQuantity,
     }),
-    [cart, setCart, fetchCurrentCart]
+    [cart, setCart, fetchCurrentCart, updateProductQuantity]
   );
 
   // Provide the authentication context to the children components

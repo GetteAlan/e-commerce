@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import "./index.scss";
 
 import Title from '../../components/Title';
-import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 import ProductPreview from '../../components/ProductPreview';
 import PurchaseSummary from '../../components/PurchaseSummary';
@@ -18,7 +17,7 @@ import { getProductsById } from '../../services/products';
 export default function Cart({reference}) {
   const navigate = useNavigate();
   const { token, account } = useAuth();
-  const { cart, fetchCurrentCart } = useCart();
+  const { cart, fetchCurrentCart, updateProductQuantity } = useCart();
   const [isLoading, setIsLoading] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
 
@@ -34,7 +33,7 @@ export default function Cart({reference}) {
           const response = await getProductsById(idProducts);
           const cartProducts = response.products?.map((product) => {
             const quantity = cart.filter(item => item.idProduct === product.id)[0]?.quantity;
-    
+
             return {
               ...product,
               quantity,
@@ -67,21 +66,23 @@ export default function Cart({reference}) {
             )}
             { !isLoading && cartProducts?.length === 0 && (
               <section className="cart-empty-wrapper">
-              <div className="svg-description">
-                <img className="cart-svg" src={CartEmpty}></img>
-              </div>
-              <div className="empty-description">
-                <span className="paragraph">Here you can see your cart list.</span>
-                <span className="paragraph"><Link to='/login'>Sign in</Link> to view your cart.</span>
-              </div>
+                <div className="svg-description">
+                  <img className="cart-svg" src={CartEmpty}></img>
+                </div>
+                <div className="empty-description">
+                  <span className="paragraph">Here you can see your cart list.</span>
+                  <span className="paragraph"><Link to='/login'>Sign in</Link> to view your cart.</span>
+                </div>
             </section>
             )}
             { cartProducts?.map((product) => (
-              <ProductPreview 
+              <ProductPreview
+                idAccount={account.id}
                 id={product.id} 
                 name={product.name} 
                 price={product.price} 
                 initialQuantity={product.quantity}
+                updateQuantity={updateProductQuantity}
               ></ProductPreview>
             ))}
           </div>

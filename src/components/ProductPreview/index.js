@@ -1,41 +1,51 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Button from '../Button';
 import IncreaseDecreaseInput from "../IncreaseDecreaseInput";
 import Card from '../Card';
 import "./index.scss";
 
 export default function ProductPreview({
+  idAccount,
   id,
   name, 
   description, 
   price,
   initialQuantity,
-  to }) {
-  const [idProduct, setIdProduct] = useState(id);
+  updateQuantity,
+  to 
+}) {
   const [quantity, setQuantity] = useState(initialQuantity);
-  
+ 
   const handleClick = () => {
     let cartProducts = JSON.parse(localStorage.getItem('products-cart'));
   
     if (cartProducts && Array.isArray(cartProducts)) {
-      cartProducts.push(idProduct);
+      cartProducts.push(id);
     } else {
-      cartProducts = [idProduct];
+      cartProducts = [id];
     }
 
     // localStorage.setItem('products-cart', JSON.stringify(cartProducts));
   };
 
-  const handleDecrease = (quantity) => {
-    
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }    
+  const handleIncreaseQuantity = async () => {
+    const newQuantity = quantity + 1;
+    const result = await updateQuantity(idAccount, id, newQuantity);
+
+    if (result) {
+      setQuantity(newQuantity);
+    }  
   };
 
-  const handleIncrease = () => {
-    setQuantity(quantity + 1);
+  const handleDecreaseQuantity = async () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1;
+      const result = await updateQuantity(idAccount, id, newQuantity);
+
+      if (result) {
+        setQuantity(newQuantity);
+      }
+    }  
   };
 
   return (
@@ -51,7 +61,7 @@ export default function ProductPreview({
         <div className="card-options">
           <div className="options-container">
             {/* <Button text="Buy" handleClick={handleClick}></Button> */}
-            <IncreaseDecreaseInput quantity={quantity} handleDecrease={() => handleDecrease(quantity)} handleIncrease={() => handleIncrease(quantity)}></IncreaseDecreaseInput>
+            <IncreaseDecreaseInput quantity={quantity} handleDecrease={handleDecreaseQuantity} handleIncrease={handleIncreaseQuantity} />
           </div>
         </div>
         <div className="card-summary">
