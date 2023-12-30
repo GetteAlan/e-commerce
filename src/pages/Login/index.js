@@ -17,7 +17,7 @@ export default function Login({reference}) {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [errorLogin, setErrorLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   const onSubmitHandling = async (event) => {
@@ -28,7 +28,7 @@ export default function Login({reference}) {
     }
 
     setIsLoading(true);
-    setErrorLogin(false);
+    setErrorMessage(false);
 
     try {
       const response = await login({username, password});
@@ -51,7 +51,7 @@ export default function Login({reference}) {
       console.log('Error', error);
       setAccount();
       setToken();
-      setErrorLogin(true);
+      setErrorMessage(true);
     }
     finally {
       setIsLoading(false);
@@ -94,7 +94,7 @@ export default function Login({reference}) {
           </div>
         </form>
       </section>
-      { errorLogin && (
+      { errorMessage && (
         <section className="messages-wrapper">
           <span className="message error">Error trying to login.</span>
         </section>

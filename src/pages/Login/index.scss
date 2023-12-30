@@ -8,11 +8,11 @@
   margin-top: $space-32;
   display: flex;
   flex-direction: column;
-  background-color: $background;
-  margin: $space-32 $space-main-margin-desktop $space-32 $space-main-margin-desktop;
+  background-color: transparent;
+  margin: $space-32 $space-main-margin-desktop;
   padding: 32px;
   border-radius: 10px;
-  align-items: start;
+  align-items: center;
   gap: 32px;
 
   .login-container {

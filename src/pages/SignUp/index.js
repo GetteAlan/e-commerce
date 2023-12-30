@@ -17,7 +17,7 @@ export default function SignUp({reference}) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
-  const [errorLogin, setErrorLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   const onSubmitHandling = async (event) => {
@@ -29,9 +29,9 @@ export default function SignUp({reference}) {
       }
   
       setIsLoading(true);
-      setErrorLogin(false);
+      setErrorMessage(false);
   
-      const response = await signUp({username, password,}); 
+      const response = await signUp({name, email, username, password, passwordCheck}); 
       const token = response?.token;
       const account = response?.account;
       
@@ -42,7 +42,7 @@ export default function SignUp({reference}) {
       console.log('Error', error);
       setAccount();
       setToken();
-      setErrorLogin(true);
+      setErrorMessage(true);
     }
     finally {
       setIsLoading(false);
@@ -61,7 +61,7 @@ export default function SignUp({reference}) {
 
   return (
     <section className="sign-up" ref={reference}>
-      <Title text="Sign Up"/>
+      <Title text="Sign up"/>
       <section className="login-container">
         <form className="login-form" onSubmit={onSubmitHandling}>
           <div className="inputs-container">
@@ -82,11 +82,11 @@ export default function SignUp({reference}) {
           </div>
         </form>
       </section>
-      { errorLogin && (
-        <section className="messages-wrapper">
-          <span className="message error">Error trying to login.</span>
-        </section>
-      )}
+        { errorMessage && (
+          <section className="messages-wrapper">
+            <span className="message error">Error trying to sign up.</span>
+          </section>   
+        )}          
     </section>
   );
 }

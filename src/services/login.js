@@ -13,7 +13,7 @@ const login = async ({username, password}) => {
     return await response.json();
 };
 
-const signUp = async ({name, email, username, password, reEnteredPassword}) => {
+const signUp = async ({name, email, username, password, passwordCheck}) => {
     const response = await fetch('https://e-commerce.gettealan.com/api/v1/signup', {
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ const signUp = async ({name, email, username, password, reEnteredPassword}) => {
             email,
             username,
             password,
-            reEnteredPassword,
+            passwordCheck,
         })
     });
 
