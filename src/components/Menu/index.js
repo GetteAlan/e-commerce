@@ -53,7 +53,14 @@ export default function Menu({ options }) {
       </header>
 
       <section className="menu-username">
-        <span className="username">{`Welcome ${account ? account.username : 'user'}!`}</span>
+        { account ? (
+          <span className="username">{`Welcome ${account.username}!`}</span>
+        ) : (
+          <div className="sign-up-container">
+            <p className="username">New customer?</p>
+            <Link to='signup'>Start here</Link>
+          </div>
+        )}
       </section>
 
       <section className="menu-content">

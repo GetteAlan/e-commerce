@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import Payment from './pages/Payment';
+import SignUp from './pages/SignUp';
 import AuthProvider from "./providers/authProvider";
 import CartProvider from "./providers/cartProvider";
 import './index.scss';
@@ -25,6 +26,7 @@ return (
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="login" element={<Login />} />
+                        <Route path='signup' element={<SignUp />}></Route>
                         <Route path="search" element={<Search />} />
                         <Route path="/product-detail/:idProduct" exact element={<ProductDetail />} />
                         <Route path="account" element={<Account />} />

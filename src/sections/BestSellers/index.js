@@ -33,7 +33,7 @@ export default function BestSellers({reference}) {
         { bestSellers?.map((product) => (
           <Product
             id={product.id}
-            title={product.title} 
+            title={product.name} 
             description={product.description} 
             price={product.price}
             to={product.to}

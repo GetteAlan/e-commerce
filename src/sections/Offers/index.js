@@ -32,7 +32,7 @@ export default function Offers({reference}) {
         { offers.map((offer) => (
           <Product
             id={offer.id}
-            title={offer.title} 
+            title={offer.name} 
             description={offer.description} 
             price={offer.price}
             to={offer.to}

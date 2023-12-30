@@ -6,6 +6,8 @@ form {
   text-align: center;
   //padding-top: 50px;
 
+  display: flex;
+
 
 }
 
@@ -14,11 +16,15 @@ form {
   border: 1px solid #ddd;
   margin: 0px;
   width: 40px;
-  height: 20px;
+  height: 42px;
   text-align: center;
-  font-weight: 600;
   vertical-align: middle;
-  padding: 11px 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  //padding: 11px 0;
   background: #eee;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -26,8 +32,23 @@ form {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
+
+    .button-text {
+      margin: 0;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .button-loading {
+      display: flex;
+      justify-content: center;
+      //align-items: center;
+      width: 32px;
+      height: 32px;
+    }
   }
+
+
 
 .value-button:hover {
   cursor: pointer;

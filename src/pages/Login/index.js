@@ -9,6 +9,8 @@ import Loading from '../../components/Loading';
 import { useAuth } from "../../providers/authProvider";
 import { useCart } from "../../providers/cartProvider";
 
+import { login } from '../../services/login';
+
 export default function Login({reference}) {
   const { setToken, setAccount } = useAuth();
   const { fetchCurrentCart } = useCart();
@@ -18,7 +20,7 @@ export default function Login({reference}) {
   const [errorLogin, setErrorLogin] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmitHandling = (event) => {
+  const onSubmitHandling = async (event) => {
     event.preventDefault();
 
     if (!username || !password) {
@@ -28,40 +30,36 @@ export default function Login({reference}) {
     setIsLoading(true);
     setErrorLogin(false);
 
-    fetch('https://e-commerce.gettealan.com/api/v1/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      })
-    })
-    .then(async (response) => {
-      const result = await response.json();
-      const token = result?.token;
-      const account = result?.account;
-
+    try {
+      const response = await login({username, password});
+      const token = response?.token;
+      const account = response?.account;
+  
       setAccount(account);
       setToken(token);
-
+  
       if (token && account) {
         await fetchCurrentCart(account.id);
         navigate('/');
-
+  
         return;
       }
-
+  
       throw new Error('Error login');
-    }).catch((error) => {
+    }
+    catch (error) {
       console.log('Error', error);
       setAccount();
       setToken();
       setErrorLogin(true);
-    }).finally(() => {
+    }
+    finally {
       setIsLoading(false);
-    });
+    }
+  };
+
+  const handleClickSignup = ()=> {
+    navigate('/signup');
   };
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export default function Login({reference}) {
             ) : (
               <>
                 <Button text="Sing in"></Button>
-                <Button text="Sing up" hierarchy="secondary"></Button>
+                <Button text="Sing up" hierarchy="secondary" handleClick={handleClickSignup}></Button>
               </>
             )}
           </div>

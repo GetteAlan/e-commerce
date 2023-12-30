@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-.login {
+.sign-up {
   //height: 100vh;
   text-align: center;
   width: -webkit-fill-available;
@@ -92,7 +92,7 @@
 }
 
 @media (max-width: 580px) {
-  .login {
+  .sign-up {
     margin-top: $space-main-margin-mobile;
 
 
